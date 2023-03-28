@@ -1,9 +1,10 @@
 import { Recipe } from '@components/Recipe';
-import { GetStaticPaths, GetStaticProps } from 'next';
+import axios from 'axios';
+import { GetServerSideProps } from 'next';
 import React from 'react'
 import { toPng } from 'html-to-image';
 import download from 'downloadjs';
-import { RecipeType, recipes } from '../../../data';
+import { RecipeType } from '../../../data';
 import { Button } from '@components/Button';
 
 type Props = {
@@ -32,21 +33,16 @@ export default function Content({ recipe }: Props) {
   }
 }
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   if (!params?.slug) throw new Error('Missing slug');
 
+  const response = await axios.get(`${process.env.BASE_URL}/api/recipes/${params.slug}`, {
+    url: 'http://localhost:3000'
+  })
+  const { recipe } = response.data
   return {
     props: {
-      recipe: recipes.find((recipe) => recipe.slug === params.slug),
+      recipe,
     }
-  }
-}
-
-export const getStaticPaths: GetStaticPaths = async () => {
-  return {
-    paths: recipes.map((recipe) => ({
-      params: { slug: recipe.slug }
-    })),
-    fallback: false,
-  }
+  };
 }

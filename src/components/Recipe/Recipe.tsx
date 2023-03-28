@@ -29,7 +29,7 @@ export function Recipe({ recipe }: Props) {
 
         <section className="flex flex-col flex-1 bg-[#f7f5f4] w-full p-6 pt-3">
           <div className={`${poppins.className} flex justify-between items-center pb-2 mb-2 border-b border-b-gray-400`}>
-            <p className="flex-1 text-left">Servings: {servings}</p>
+            <p className="text-base flex-1 text-left">Servings: {servings}</p>
             <p className="flex-1 text-center">Prepping Time: {prep_time} min</p>
             <p className="flex-1 text-right">Cooking Time: {cook_time} min</p>
           </div>
@@ -42,7 +42,7 @@ export function Recipe({ recipe }: Props) {
                 ))}
               </ul>
 
-              {optional_ingredients?.length && (
+              {optional_ingredients?.length ? (
                 <div className="mt-8">
                   <h4 className="mb-1">Optional:</h4>
                   <ul className="list-disc list-inside">
@@ -51,13 +51,13 @@ export function Recipe({ recipe }: Props) {
                     ))}
                   </ul>
                 </div>
-              )}
+              ) : null}
             </Section>
 
             <Section heading='Directions'>
               <ol className="list-decimal list-outside">
                 {directions.map((direction) => (
-                  <li>{direction}</li>
+                  <li className="text-base">{direction}</li>
                 ))}
               </ol>
             </Section>

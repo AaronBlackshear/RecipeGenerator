@@ -6,7 +6,6 @@ import slugify from 'slugify';
 
 export function ReviewStep() {
   const recipe = useFormState();
-  const dispatch = useFormStateDispatch();
 
   return (
     <div>

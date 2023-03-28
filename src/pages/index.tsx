@@ -4,12 +4,14 @@ import { useUser } from '@auth0/nextjs-auth0/client';
 // Components
 import { RecipeCondensed } from '@components/Recipe';
 
-import { recipes } from '../data';
+import { RecipeType } from '../data';
 import { ButtonLink } from '@components/Button';
 
-type Props = {}
+type Props = {
+  recipes: RecipeType[];
+}
 
-export default function Home({ }: Props) {
+export default function Home({ recipes }: Props) {
   const { error } = useUser();
 
   if (error) throw new Error(error.message);
@@ -38,4 +40,14 @@ export default function Home({ }: Props) {
   )
 }
 
-export const getServerSideProps = withPageAuthRequired();
+export const getServerSideProps = withPageAuthRequired({
+  async getServerSideProps() {
+    const response = await fetch(`${process.env.BASE_URL}/api/recipes`)
+    const { recipes } = await response.json()
+    return {
+      props: {
+        recipes,
+      }
+    };
+  }
+});
