@@ -5,9 +5,13 @@ import { ImageType } from 'react-images-uploading';
 export type FormState = {
   image: Nullable<ImageType>;
   title: string;
-  servings: number,
-  prepTime: number,
-  cookTime: number,
+  servings: number;
+  prepTime: number;
+  cookTime: number;
+  requiredIngredients: string[];
+  optionalIngredients: string[];
+  directions: string[];
+  notes: string;
 };
 
 const FormStateContext = createContext(getInitialFormState());
@@ -64,5 +68,9 @@ function getInitialFormState(): FormState {
     servings: 0,
     prepTime: 0,
     cookTime: 0,
+    requiredIngredients: [],
+    optionalIngredients: [],
+    directions: [],
+    notes: '',
   }
 }

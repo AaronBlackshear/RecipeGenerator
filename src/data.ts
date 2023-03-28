@@ -10,7 +10,6 @@ export interface RecipeType {
   optional_ingredients?: string[];
   directions: string[];
   notes?: string;
-
 }
 
 export const recipes: RecipeType[] = [
