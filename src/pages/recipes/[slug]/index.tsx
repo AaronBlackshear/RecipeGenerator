@@ -9,12 +9,16 @@ import { Button, ButtonLink } from '@components/Button';
 import { useRouter } from 'next/router';
 import { getRecipeEditFormUrl } from '@utils/url_app';
 import { withPageAuthRequired } from '@auth0/nextjs-auth0';
+import { Loader } from '@components/Loader';
+import { Nullable } from '@utils/types';
+import { useRecipe } from '@hooks';
+import { getQuerySlug } from '@utils';
 
 type Props = {
   recipe: RecipeType;
 };
 
-export default function Content({ recipe }: Props) {
+function Content({ recipe }: Props) {
   const router = useRouter();
 
   return (
@@ -53,16 +57,26 @@ export default function Content({ recipe }: Props) {
   }
 }
 
-export const getServerSideProps = withPageAuthRequired({
-  async getServerSideProps({ params }) {
-    if (!params?.slug) throw new Error('Missing slug');
+export default function Page() {
+  const data = useApiBootData();
 
-    const response = await axios.get(`${process.env.BASE_URL}/api/recipes/${params.slug}`)
-    const { recipe } = response.data
-    return {
-      props: {
-        recipe,
-      }
-    };
+  if (!data) return <Loader />
+
+  return <Content {...data} />
+}
+
+type ApiBootData = {
+  recipe: RecipeType;
+}
+
+function useApiBootData(): Nullable<ApiBootData> {
+  const { query } = useRouter();
+  const { recipe, isLoading, isError } = useRecipe(query.slug ? getQuerySlug(query) : undefined);
+
+  if (isLoading || !recipe) return null;
+  if (isError) throw new Error(isError);
+
+  return {
+    recipe,
   }
-});
+}

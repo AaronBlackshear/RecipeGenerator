@@ -23,8 +23,6 @@ export default function Page() {
 type ApiBootData = {
   step: RecipeFormStep;
   recipe: RecipeType;
-  isLoading: boolean;
-  isError: boolean;
 }
 
 function useApiBootData(): Nullable<ApiBootData> {
@@ -39,8 +37,6 @@ function useApiBootData(): Nullable<ApiBootData> {
   return {
     step,
     recipe,
-    isLoading,
-    isError,
   }
 }
 

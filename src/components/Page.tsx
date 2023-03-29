@@ -9,9 +9,9 @@ type Props = {
 
 export function Page({ children }: Props) {
   const router = useRouter();
-  const { user } = useUser();
+  const { user, isLoading } = useUser();
 
-  // if (!user) router.push('/api/auth/login')
+  if (!user && !isLoading) router.push('/api/auth/login')
 
   return (
     <div className="w-full h-full min-h-screen bg-gray-900">

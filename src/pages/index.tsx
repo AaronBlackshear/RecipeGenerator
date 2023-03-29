@@ -1,22 +1,15 @@
 import Head from 'next/head'
-import axios from 'axios'
-import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 import { useUser } from '@auth0/nextjs-auth0/client';
 // Components
 import { RecipeCondensed } from '@components/Recipe';
 
 import { RecipeType } from '@components/Recipe';
 import { ButtonLink } from '@components/Button';
+import { useRecipes } from '@hooks';
+import { Nullable } from '@utils/types';
+import { Loader } from '@components/Loader';
 
-type Props = {
-  recipes: RecipeType[];
-}
-
-export default function Home({ recipes }: Props) {
-  const { error } = useUser();
-
-  if (error) throw new Error(error.message);
-
+function Content({ recipes }: ApiBootData) {
   return (
     <>
       <Head>
@@ -41,14 +34,25 @@ export default function Home({ recipes }: Props) {
   )
 }
 
-export const getServerSideProps = withPageAuthRequired({
-  async getServerSideProps() {
-    const response = await axios.get(`${process.env.BASE_URL}/api/recipes`)
-    const { recipes } = await response.data;
-    return {
-      props: {
-        recipes,
-      }
-    };
+export default function Page() {
+  const data = useApiBootData();
+
+  if (!data) return <Loader />
+
+  return <Content {...data} />
+}
+
+type ApiBootData = {
+  recipes: RecipeType[];
+}
+
+function useApiBootData(): Nullable<ApiBootData> {
+  const { recipes, isLoading, isError } = useRecipes();
+
+  if (isLoading || !recipes.length) return null;
+  if (isError) throw new Error(isError);
+
+  return {
+    recipes,
   }
-});
+}

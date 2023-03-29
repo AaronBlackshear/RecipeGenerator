@@ -11,3 +11,13 @@ export const useRecipe = (slug?: Maybe<string>) => {
     isError: error
   }
 }
+
+export const useRecipes = () => {
+  const { data, error, isLoading } = useSWR(`/api/recipes`, fetcher)
+
+  return {
+    recipes: data?.recipes,
+    isLoading,
+    isError: error
+  }
+}
