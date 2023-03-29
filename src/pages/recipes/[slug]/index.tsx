@@ -16,8 +16,6 @@ type Props = {
 export default function Content({ recipe }: Props) {
   const router = useRouter();
 
-  console.log(recipe);
-
   return (
     <div className="pb-12">
       <section className="flex justify-end mb-5 space-x-3">
@@ -40,10 +38,12 @@ export default function Content({ recipe }: Props) {
 
   async function downloadRecipeTemplate() {
     // Convert HTML to image format
-    const htmlElement = document.getElementById('recipe-container');
+    const htmlElement = document.getElementById('canvas-container');
     if (!htmlElement) throw new Error('Missing HTML Content');
+    htmlElement.style.width = '768px';
     const dataUrl = await toPng(htmlElement)
     download(dataUrl, `${recipe.slug}-recipe`);
+    htmlElement.style.width = '100%';
   }
 
   async function deleteRecipe(id: string) {
