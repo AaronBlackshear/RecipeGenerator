@@ -14,31 +14,31 @@ export function getRecipeNewFormUrl(step?: Maybe<RecipeFormStep>): UrlObject {
   }
 }
 
-export function getRecipeFormNextStepUrl(step: RecipeFormStep): UrlObject {
+export function getRecipeFormNextStepUrl(step: RecipeFormStep, slug?: string): UrlObject {
   switch (step) {
     case 'title':
       return {
-        pathname: `/recipes/new/metadata`
+        pathname: slug ? `/recipes/${slug}/edit/metadata` : `/recipes/new/metadata`,
       }
 
     case 'metadata':
       return {
-        pathname: `/recipes/new/ingredients`
+        pathname: slug ? `/recipes/${slug}/edit/ingredients` : `/recipes/new/ingredients`,
       }
 
     case 'ingredients':
       return {
-        pathname: `/recipes/new/directions`
+        pathname: slug ? `/recipes/${slug}/edit/directions` : `/recipes/new/directions`,
       }
 
     case 'directions':
       return {
-        pathname: `/recipes/new/notes`
+        pathname: slug ? `/recipes/${slug}/edit/notes` : `/recipes/new/notes`,
       }
 
     case 'notes':
       return {
-        pathname: `/recipes/new/review`
+        pathname: slug ? `/recipes/${slug}/edit/review` : `/recipes/new/review`,
       }
 
     case 'review':
@@ -46,34 +46,34 @@ export function getRecipeFormNextStepUrl(step: RecipeFormStep): UrlObject {
   }
 }
 
-export function getRecipeFormPreviousStepUrl(step: RecipeFormStep): UrlObject {
+export function getRecipeFormPreviousStepUrl(step: RecipeFormStep, slug?: string): UrlObject {
   switch (step) {
     case 'title':
       return {}
 
     case 'metadata':
       return {
-        pathname: `/recipes/new/title`
+        pathname: slug ? `/recipes/${slug}/edit/title` : `/recipes/new/title`,
       }
 
     case 'ingredients':
       return {
-        pathname: `/recipes/new/metadata`
+        pathname: slug ? `/recipes/${slug}/edit/metadata` : `/recipes/new/metadata`,
       }
 
     case 'directions':
       return {
-        pathname: `/recipes/new/ingredients`
+        pathname: slug ? `/recipes/${slug}/edit/ingredients` : `/recipes/new/ingredients`,
       }
 
     case 'notes':
       return {
-        pathname: `/recipes/new/directions`
+        pathname: slug ? `/recipes/${slug}/edit/directions` : `/recipes/new/directions`,
       }
 
     case 'review':
       return {
-        pathname: `/recipes/new/notes`
+        pathname: slug ? `/recipes/${slug}/edit/notes` : `/recipes/new/notes`,
       }
   }
 }

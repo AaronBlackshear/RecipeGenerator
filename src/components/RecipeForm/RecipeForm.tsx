@@ -18,9 +18,6 @@ function Content({ step, recipe }: Props) {
   const formState = useFormState();
   const [currentStep, setCurrentStep] = useState<RecipeFormStep>(step);
 
-  console.log(formState);
-
-
   useEffect(() => {
     if (step !== currentStep) setCurrentStep(step);
   }, [step])
@@ -39,6 +36,7 @@ function Content({ step, recipe }: Props) {
 
   async function submitRecipe() {
     const formattedRecipe = formatRecipe(formState);
+
     if (recipe?._id) {
       // Update recipe
       await axios.put(`/api/recipes/${recipe?._id}/edit`, {
@@ -72,9 +70,9 @@ function Content({ step, recipe }: Props) {
   }
 }
 
-export function RecipeForm({ recipe, ...props }: Props) {
+export function RecipeForm(props: Props) {
   return (
-    <FormStateProvider recipe={recipe}>
+    <FormStateProvider recipe={props.recipe}>
       <Content {...props} />
     </FormStateProvider>
   )
