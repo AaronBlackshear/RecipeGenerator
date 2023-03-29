@@ -1,4 +1,4 @@
-import { Recipe } from '@components/Recipe';
+import { Recipe, RecipeView } from '@components/Recipe';
 import axios from 'axios';
 import { GetServerSideProps } from 'next';
 import React from 'react'
@@ -37,18 +37,23 @@ function Content({ recipe }: Props) {
         </Button>
       </section>
 
-      <Recipe recipe={recipe} />
+      <RecipeView recipe={recipe} />
     </div>
   )
 
   async function downloadRecipeTemplate() {
     // Convert HTML to image format
-    const htmlElement = document.getElementById('canvas-container');
-    if (!htmlElement) throw new Error('Missing HTML Content');
-    htmlElement.style.width = '768px';
-    const dataUrl = await toPng(htmlElement)
-    download(dataUrl, `${recipe.slug}-recipe`);
-    htmlElement.style.width = '100%';
+    const htmlElements = document.querySelectorAll('[data-canvas-container]');
+    if (!htmlElements.length) throw new Error('Missing HTML Content');
+
+    htmlElements.forEach(async (elem: any, i) => {
+      const recipeFileName = htmlElements.length > 1 ? `${recipe.slug}-recipe-page-${i + 1}` : `${recipe.slug}-recipe`;
+
+      elem.style.width = '768px';
+      const dataUrl = await toPng(elem)
+      download(dataUrl, recipeFileName);
+      elem.style.width = '100%';
+    })
   }
 
   async function deleteRecipe(id: string) {

@@ -1,5 +1,5 @@
 import React from 'react'
-import { useFormState, useFormStateDispatch } from '@components/RecipeForm/FormSteps/FormContext';
+import { useFormState } from '@components/RecipeForm/FormSteps/FormContext';
 import { Recipe } from '@components/Recipe/Recipe';
 import { RecipeType } from '@components/Recipe';
 import slugify from 'slugify';
