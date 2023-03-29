@@ -1,3 +1,4 @@
+import { withPageAuthRequired } from '@auth0/nextjs-auth0/client';
 import { RecipeForm } from '@components/RecipeForm'
 import { RecipeFormStep, RECIPE_FORM_STEPS } from '@components/RecipeForm/RecipeFormNav';
 import { GetStaticPaths, GetStaticProps } from 'next';
@@ -7,13 +8,13 @@ type Props = {
   step: RecipeFormStep;
 }
 
-export default function Content({ step }: Props) {
+export default withPageAuthRequired(function Page({ step }: Props) {
   return (
     <div>
       <RecipeForm step={step} />
     </div>
   )
-}
+})
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   return {
