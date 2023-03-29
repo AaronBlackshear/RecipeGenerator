@@ -10,14 +10,13 @@ export default async function handler(
 ) {
   const client = new MongoClient(uri);
   try {
-    // const db = client.db('recipe_generator');
-    // const recipes = await db
-    //   .collection("recipes")
-    //   .find({})
-    //   .toArray();
+    const db = client.db('recipe_generator');
+    const recipes = await db
+      .collection("recipes")
+      .find({})
+      .toArray();
 
-    // res.status(200).json({ recipes })
-    res.status(200).json({ recipes: [], foo: 'bar' })
+    res.status(200).json({ recipes })
   } finally {
     // Ensures that the client will close when you finish/error
     await client.close();
