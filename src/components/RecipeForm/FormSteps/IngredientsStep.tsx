@@ -3,9 +3,7 @@ import { Input } from '@components/Form';
 import React, { useState } from 'react'
 import { useFormState, useFormStateDispatch } from '@components/RecipeForm/FormSteps/FormContext';
 
-type Props = {};
-
-export function IngredientsStep({ }: Props) {
+export function IngredientsStep() {
   const { requiredIngredients, optionalIngredients } = useFormState();
   const dispatch = useFormStateDispatch();
 
