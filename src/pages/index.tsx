@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import axios from 'axios'
 import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 import { useUser } from '@auth0/nextjs-auth0/client';
 // Components
@@ -42,8 +43,8 @@ export default function Home({ recipes }: Props) {
 
 export const getServerSideProps = withPageAuthRequired({
   async getServerSideProps() {
-    const response = await fetch(`${process.env.BASE_URL}/api/recipes`)
-    const { recipes } = await response.json()
+    const response = await axios.get(`${process.env.BASE_URL}/api/recipes`)
+    const { recipes } = await response.data;
     return {
       props: {
         recipes,
