@@ -56,8 +56,8 @@ export function Recipe({ recipe }: Props) {
             <div className={`${playfairDisplay.className} flex flex-row flex-1 gap-x-8`}>
               <Section isIngredients heading='Ingredients'>
                 <ul className="list-disc list-inside">
-                  {required_ingredients.map((ingredient) => (
-                    <li>{ingredient}</li>
+                  {required_ingredients.map((ingredient, i) => (
+                    <li key={i}>{ingredient}</li>
                   ))}
                 </ul>
 
@@ -65,8 +65,8 @@ export function Recipe({ recipe }: Props) {
                   <div className="mt-8">
                     <h4 className="mb-1">Optional:</h4>
                     <ul className="list-disc list-inside">
-                      {optional_ingredients.map(ingredient => (
-                        <li>{ingredient}</li>
+                      {optional_ingredients.map((ingredient, i) => (
+                        <li key={i}>{ingredient}</li>
                       ))}
                     </ul>
                   </div>
@@ -75,8 +75,8 @@ export function Recipe({ recipe }: Props) {
 
               <Section heading='Directions'>
                 <ol className="list-decimal list-outside">
-                  {directions.map((direction) => (
-                    <li className="text-base">{direction}</li>
+                  {directions.map((direction, i) => (
+                    <li key={i} className="text-base">{direction}</li>
                   ))}
                 </ol>
               </Section>
