@@ -1,9 +1,10 @@
+import { RecipeType } from '@components/Recipe';
 import { Nullable } from '@utils/types';
 import { createContext, Dispatch, useContext, useReducer } from 'react';
 import { ImageType } from 'react-images-uploading';
 
 export type FormState = {
-  image: Nullable<ImageType>;
+  image: Nullable<string>;
   title: string;
   servings: number;
   prepTime: number;
@@ -19,12 +20,13 @@ const FormStateDispatchContext = createContext<Dispatch<FormStateReducerActions>
 
 type Props = {
   children: React.ReactNode;
+  recipe?: RecipeType;
 }
 
-export function FormStateProvider({ children }: Props) {
+export function FormStateProvider({ recipe, children }: Props) {
   const [formState, dispatch] = useReducer(
     formStateReducer,
-    initialFormState
+    getInitialFormState(recipe)
   );
 
   return (
@@ -59,9 +61,21 @@ function formStateReducer(formState: FormState, action: FormStateReducerActions)
   }
 }
 
-const initialFormState = getInitialFormState();
+function getInitialFormState(recipe?: RecipeType): FormState {
+  if (recipe) {
+    return {
+      image: recipe.image,
+      title: recipe.title,
+      servings: recipe.servings,
+      prepTime: recipe.prep_time,
+      cookTime: recipe.cook_time,
+      requiredIngredients: recipe.required_ingredients,
+      optionalIngredients: recipe.optional_ingredients || [],
+      directions: recipe.directions,
+      notes: recipe.notes || '',
+    }
+  }
 
-function getInitialFormState(): FormState {
   return {
     image: null,
     title: '',

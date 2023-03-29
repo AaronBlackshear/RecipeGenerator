@@ -1,7 +1,7 @@
 import React from 'react'
 import { useFormState, useFormStateDispatch } from '@components/RecipeForm/FormSteps/FormContext';
 import { Recipe } from '@components/Recipe/Recipe';
-import { RecipeType } from '@data';
+import { RecipeType } from '@components/Recipe';
 import slugify from 'slugify';
 
 export function ReviewStep() {
@@ -15,10 +15,10 @@ export function ReviewStep() {
 
   function mockRecipe(): RecipeType {
     return {
-      id: 'temp_id',
+      _id: 'temp_id',
       slug: slugify(recipe.title),
       title: recipe.title,
-      image: recipe.image?.data_url,
+      image: recipe.image || '',
       servings: recipe.servings,
       prep_time: recipe.prepTime,
       cook_time: recipe.cookTime,

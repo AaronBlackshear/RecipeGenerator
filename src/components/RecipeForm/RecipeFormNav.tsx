@@ -1,4 +1,6 @@
 import { Button, ButtonLink } from '@components/Button'
+import { getRecipeEditFormUrl, getRecipeNewFormUrl } from '@utils/url_app';
+import { useRouter } from 'next/router';
 import React from 'react'
 
 export type RecipeFormStep = 'title' | 'metadata' | 'ingredients' | 'directions' | 'notes' | 'review';
@@ -34,9 +36,16 @@ type RecipeFormNavItemProps = {
 }
 
 function RecipeFormNavItem({ isActive = false, step }: RecipeFormNavItemProps) {
+  const { pathname, query } = useRouter();
+
+  const isEditPath = pathname.includes('/edit')
+  const slug = (Array.isArray(query.slug) ? query.slug[0] : query.slug)
+
+  const href = isEditPath && slug ? getRecipeEditFormUrl(slug, step) : getRecipeNewFormUrl(step)
+
   return (
     <li className={`${isActive ? 'opacity-100' : 'opacity-50'}`}>
-      <ButtonLink href={`/recipes/new/${step}`} variant="minimal" size="sm">
+      <ButtonLink href={href} variant="minimal" size="sm">
         <span className="capitalize">{step}</span>
       </ButtonLink>
     </li>

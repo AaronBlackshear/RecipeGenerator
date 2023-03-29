@@ -1,4 +1,4 @@
-import { RecipeType } from '@data';
+import { RecipeType } from '@components/Recipe';
 import Image from 'next/image';
 import React from 'react'
 import { DM_Serif_Display, Poppins, Playfair_Display } from 'next/font/google'

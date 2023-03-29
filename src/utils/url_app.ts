@@ -1,14 +1,20 @@
 import { RecipeFormStep } from "@components/RecipeForm/RecipeFormNav";
 import { UrlObject } from "url";
-import { Nullable } from "@utils/types";
+import { Maybe } from "@utils/types";
 
-export function getRecipeFormStep(step: RecipeFormStep): UrlObject {
+export function getRecipeEditFormUrl(slug: string, step?: Maybe<RecipeFormStep>): UrlObject {
   return {
-    pathname: `/recipes/new/${step}`
+    pathname: `/recipes/${slug}/edit${step ? `/${step}` : ''}`
   }
 }
 
-export function getNextRecipeFormStep(step: RecipeFormStep): UrlObject {
+export function getRecipeNewFormUrl(step?: Maybe<RecipeFormStep>): UrlObject {
+  return {
+    pathname: `/recipes/new${step ? `/${step}` : ''}`
+  }
+}
+
+export function getRecipeFormNextStepUrl(step: RecipeFormStep): UrlObject {
   switch (step) {
     case 'title':
       return {
@@ -40,7 +46,7 @@ export function getNextRecipeFormStep(step: RecipeFormStep): UrlObject {
   }
 }
 
-export function getPreviousRecipeFormStep(step: RecipeFormStep): UrlObject {
+export function getRecipeFormPreviousStepUrl(step: RecipeFormStep): UrlObject {
   switch (step) {
     case 'title':
       return {}

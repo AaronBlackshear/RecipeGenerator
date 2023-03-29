@@ -5,17 +5,21 @@ import { RecipeFormNav, RecipeFormStep } from '@components/RecipeForm/RecipeForm
 import { RecipeFormContent } from '@components/RecipeForm/RecipeFormContent';
 import { StepNavigation } from './FormSteps/StepNavigation';
 import { FormStateProvider, useFormState, FormState } from '@components/RecipeForm/FormSteps/FormContext';
-import { RecipeType } from '@data';
+import { RecipeType } from '@components/Recipe';
 import { useRouter } from 'next/router';
 
 type Props = {
   step: RecipeFormStep;
+  recipe?: RecipeType;
 }
 
-function Content({ step }: Props) {
+function Content({ step, recipe }: Props) {
   const router = useRouter()
   const formState = useFormState();
   const [currentStep, setCurrentStep] = useState<RecipeFormStep>(step);
+
+  console.log(formState);
+
 
   useEffect(() => {
     if (step !== currentStep) setCurrentStep(step);
@@ -35,10 +39,17 @@ function Content({ step }: Props) {
 
   async function submitRecipe() {
     const formattedRecipe = formatRecipe(formState);
-
-    await axios.post('/api/recipe/new', {
-      recipe: formattedRecipe,
-    })
+    if (recipe?._id) {
+      // Update recipe
+      await axios.put(`/api/recipes/${recipe?._id}/edit`, {
+        recipe: formattedRecipe,
+      })
+    } else {
+      // Create recipe
+      await axios.post('/api/recipes/new', {
+        recipe: formattedRecipe,
+      })
+    }
 
     router.push(`/recipes/${formattedRecipe.slug}`)
   }
@@ -49,7 +60,7 @@ function Content({ step }: Props) {
     return ({
       title: recipe.title,
       slug: slugify(recipe.title),
-      image: recipe.image.data_url,
+      image: recipe.image,
       servings: recipe.servings,
       prep_time: recipe.prepTime,
       cook_time: recipe.cookTime,
@@ -61,9 +72,9 @@ function Content({ step }: Props) {
   }
 }
 
-export function RecipeForm(props: Props) {
+export function RecipeForm({ recipe, ...props }: Props) {
   return (
-    <FormStateProvider>
+    <FormStateProvider recipe={recipe}>
       <Content {...props} />
     </FormStateProvider>
   )

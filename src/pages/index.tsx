@@ -4,7 +4,7 @@ import { useUser } from '@auth0/nextjs-auth0/client';
 // Components
 import { RecipeCondensed } from '@components/Recipe';
 
-import { RecipeType } from '../data';
+import { RecipeType } from '@components/Recipe';
 import { ButtonLink } from '@components/Button';
 
 type Props = {
@@ -32,7 +32,7 @@ export default function Home({ recipes }: Props) {
 
         <div className="flex flex-col gap-3">
           {recipes.map(recipe => (
-            <RecipeCondensed key={recipe.id} recipe={recipe} />
+            <RecipeCondensed key={recipe._id} recipe={recipe} />
           ))}
         </div>
       </main>

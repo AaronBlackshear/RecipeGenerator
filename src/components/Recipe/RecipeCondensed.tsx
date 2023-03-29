@@ -1,4 +1,4 @@
-import { RecipeType } from '@data'
+import { RecipeType } from '@components/Recipe'
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react'
