@@ -17,6 +17,8 @@ export default async function handler(
       .toArray();
 
     res.status(200).json({ recipes })
+  } catch (e) {
+    throw new Error(e as any)
   } finally {
     // Ensures that the client will close when you finish/error
     await client.close();
