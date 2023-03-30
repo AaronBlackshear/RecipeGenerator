@@ -13,7 +13,7 @@ type Props = {
 };
 
 export function Recipe({ recipe, directionsStartIndex = 0 }: Props) {
-  const { image, title, servings, prep_time, cook_time, required_ingredients, optional_ingredients, directions, notes } = recipe;
+  const { image, title, servings, prep_time, cook_time, required_ingredients, optional_ingredients, directions } = recipe;
 
   return (
     <div className="ratio-standard w-[768px] h-[1152px]">
@@ -66,13 +66,6 @@ export function Recipe({ recipe, directionsStartIndex = 0 }: Props) {
               </ol>
             </Section>
           </div>
-
-          {notes && (
-            <div className={`${playfairDisplay.className} flex flex-col gap-y-1 px-3 py-1 border border-gray-400`}>
-              <h4 className="text-lg">NOTES</h4>
-              <p className="text-sm">{notes}</p>
-            </div>
-          )}
         </section>
       </div>
     </div>

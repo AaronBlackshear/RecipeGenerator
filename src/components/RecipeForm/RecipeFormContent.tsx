@@ -1,6 +1,6 @@
 import React from 'react'
 import { RecipeFormStep } from '@components/RecipeForm/RecipeFormNav';
-import { TitleStep, MetadataStep, IngredientsStep, DirectionsStep, NotesStep, ReviewStep } from '@components/RecipeForm/FormSteps';
+import { TitleStep, MetadataStep, IngredientsStep, DirectionsStep, ReviewStep } from '@components/RecipeForm/FormSteps';
 
 type Props = {
   currentStep: RecipeFormStep;
@@ -19,9 +19,6 @@ export function RecipeFormContent({ currentStep }: Props): JSX.Element {
 
     case 'directions':
       return <DirectionsStep />;
-
-    case 'notes':
-      return <NotesStep />;
 
     case 'review':
       return <ReviewStep />;

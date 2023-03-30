@@ -12,7 +12,6 @@ export type FormState = {
   requiredIngredients: string[];
   optionalIngredients: string[];
   directions: string[];
-  notes: string;
 };
 
 const FormStateContext = createContext(getInitialFormState());
@@ -72,7 +71,6 @@ function getInitialFormState(recipe?: RecipeType): FormState {
       requiredIngredients: recipe.required_ingredients,
       optionalIngredients: recipe.optional_ingredients || [],
       directions: recipe.directions,
-      notes: recipe.notes || '',
     }
   }
 
@@ -85,6 +83,5 @@ function getInitialFormState(recipe?: RecipeType): FormState {
     requiredIngredients: [],
     optionalIngredients: [],
     directions: [],
-    notes: '',
   }
 }

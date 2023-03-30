@@ -33,11 +33,6 @@ export function getRecipeFormNextStepUrl(step: RecipeFormStep, slug?: string): U
 
     case 'directions':
       return {
-        pathname: slug ? `/recipes/${slug}/edit/notes` : `/recipes/new/notes`,
-      }
-
-    case 'notes':
-      return {
         pathname: slug ? `/recipes/${slug}/edit/review` : `/recipes/new/review`,
       }
 
@@ -66,14 +61,9 @@ export function getRecipeFormPreviousStepUrl(step: RecipeFormStep, slug?: string
         pathname: slug ? `/recipes/${slug}/edit/ingredients` : `/recipes/new/ingredients`,
       }
 
-    case 'notes':
-      return {
-        pathname: slug ? `/recipes/${slug}/edit/directions` : `/recipes/new/directions`,
-      }
-
     case 'review':
       return {
-        pathname: slug ? `/recipes/${slug}/edit/notes` : `/recipes/new/notes`,
+        pathname: slug ? `/recipes/${slug}/edit/direction` : `/recipes/new/direction`,
       }
   }
 }

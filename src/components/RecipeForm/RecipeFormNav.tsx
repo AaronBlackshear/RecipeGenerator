@@ -3,14 +3,13 @@ import { getRecipeEditFormUrl, getRecipeNewFormUrl } from '@utils/url_app';
 import { useRouter } from 'next/router';
 import React from 'react'
 
-export type RecipeFormStep = 'title' | 'metadata' | 'ingredients' | 'directions' | 'notes' | 'review';
+export type RecipeFormStep = 'title' | 'metadata' | 'ingredients' | 'directions' | 'review';
 
 export const RECIPE_FORM_STEPS: RecipeFormStep[] = [
   'title',
   'metadata',
   'ingredients',
   'directions',
-  'notes',
   'review',
 ]
 
