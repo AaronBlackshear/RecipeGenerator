@@ -1,12 +1,10 @@
 import Head from 'next/head'
-// Components
 import { RecipeCondensed } from '@components/Recipe';
-
 import { RecipeType } from '@components/Recipe';
 import { ButtonLink } from '@components/Button';
-import { useRecipes } from '@hooks';
-import { Nullable } from '@utils/types';
 import { Loader } from '@components/Loader';
+import { Nullable } from '@utils/types';
+import { useRecipes } from '@hooks';
 
 function Content({ recipes }: ApiBootData) {
   return (
