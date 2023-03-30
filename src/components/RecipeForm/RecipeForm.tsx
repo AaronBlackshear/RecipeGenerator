@@ -65,7 +65,6 @@ function Content({ step, recipe }: Props) {
       required_ingredients: recipe.requiredIngredients,
       optional_ingredients: recipe.optionalIngredients.length ? recipe.optionalIngredients : undefined,
       directions: recipe.directions,
-      notes: recipe.notes ? recipe.notes : undefined,
     })
   }
 }

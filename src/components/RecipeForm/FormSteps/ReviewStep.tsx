@@ -25,7 +25,6 @@ export function ReviewStep() {
       required_ingredients: recipe.requiredIngredients,
       optional_ingredients: recipe.optionalIngredients,
       directions: recipe.directions,
-      notes: recipe.notes,
     }
   }
 }

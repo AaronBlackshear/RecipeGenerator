@@ -9,5 +9,4 @@ export interface RecipeType {
   required_ingredients: string[];
   optional_ingredients?: string[];
   directions: string[];
-  notes?: string;
 }
