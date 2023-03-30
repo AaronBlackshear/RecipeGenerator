@@ -1,0 +1,19 @@
+name: Next.js Build Integration
+
+on:
+  pull_request:
+    branches:
+    - main
+    
+jobs:
+  test_pull_request:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 12
+      - run: npm ci
+      - run: npm lint
+      - run: npm tsc
+      - run: npm build
