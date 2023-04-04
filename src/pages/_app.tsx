@@ -1,4 +1,5 @@
 import type { AppProps } from 'next/app'
+import { ThemeProvider } from "next-themes"
 import { UserProvider } from '@auth0/nextjs-auth0/client'
 import { withPageAuthRequired } from '@auth0/nextjs-auth0'
 import { Page } from '@components/Page'
@@ -9,13 +10,15 @@ const nunitoSans = Nunito_Sans({ weight: ["300", "400", "600", "700", "800"], su
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <div className={nunitoSans.className}>
-      <UserProvider>
-        <Page>
-          <Component {...pageProps} />
-        </Page>
-      </UserProvider>
-    </div>
+    <ThemeProvider attribute="class">
+      <div className={nunitoSans.className}>
+        <UserProvider>
+          <Page>
+            <Component {...pageProps} />
+          </Page>
+        </UserProvider>
+      </div>
+    </ThemeProvider>
   )
 }
 

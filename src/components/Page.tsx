@@ -14,7 +14,7 @@ export function Page({ children }: Props) {
   if (!user && !isLoading) router.push('/api/auth/login')
 
   return (
-    <div className="w-full h-full min-h-screen bg-gray-900">
+    <div className="w-full h-full min-h-screen bg-white dark:bg-offBlack">
       <Header />
       <div className="max-w-3xl mx-auto">
         {children}

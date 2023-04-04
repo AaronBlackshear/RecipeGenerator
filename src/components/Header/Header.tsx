@@ -1,9 +1,8 @@
 import Link from 'next/link'
 import React from 'react'
 
-type Props = {}
+export function Header() {
 
-export function Header({ }: Props) {
   return (
     <div className="mb-4 pt-4 px-6">
       <header className="flex justify-between max-w-3xl mx-auto border-b border-b-white pb-2">
