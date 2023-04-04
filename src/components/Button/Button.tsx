@@ -1,18 +1,24 @@
 import React from 'react'
-import { ButtonSize, ButtonVariant, getButtonStyles } from '@components/Button';
+import { ButtonSize, ButtonVariant, getButtonStyles, getFontSpacingStyles } from '@components/Button';
+import { Icon, IconType } from '@components/Icons';
 
 export type ButtonBaseProps = {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   variant: ButtonVariant;
   size?: ButtonSize;
+  icon?: IconType;
 }
 
-type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & ButtonBaseProps;
+export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & ButtonBaseProps;
 
-export function Button({ children, variant, size, ...props }: ButtonProps) {
+export function Button({ children, variant, size = 'md', icon, ...props }: ButtonProps) {
   const buttonStyles = getButtonStyles({ variant, size })
+  const buttonFontStyles = getFontSpacingStyles(size)
 
   return (
-    <button className={`rounded ${buttonStyles}`} {...props}>{children}</button>
+    <button className={`flex items-center rounded-xl  ${buttonStyles}`} {...props}>
+      {icon && <Icon type={icon} size={size} />}
+      {children && <span className={buttonFontStyles}>{children}</span>}
+    </button>
   )
 }
