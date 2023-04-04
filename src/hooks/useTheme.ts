@@ -1,6 +1,6 @@
 import { useTheme as useNextTheme } from "next-themes";
 
-export const useTheme = () => {
+export default () => {
   const { systemTheme, theme, setTheme: setNextTheme } = useNextTheme();
   const currentTheme = theme === 'system' ? systemTheme : theme;
   const isDark = currentTheme === 'dark';

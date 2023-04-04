@@ -9,14 +9,14 @@ export type ButtonBaseProps = {
   icon?: IconType;
 }
 
-type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & ButtonBaseProps;
+export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & ButtonBaseProps;
 
 export function Button({ children, variant, size = 'md', icon, ...props }: ButtonProps) {
   const buttonStyles = getButtonStyles({ variant, size })
   const buttonFontStyles = getFontSpacingStyles(size)
 
   return (
-    <button className={`flex items-center rounded-xl border border-gray-11 ${buttonStyles}`} {...props}>
+    <button className={`flex items-center rounded-xl  ${buttonStyles}`} {...props}>
       {icon && <Icon type={icon} size={size} />}
       {children && <span className={buttonFontStyles}>{children}</span>}
     </button>

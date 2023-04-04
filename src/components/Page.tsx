@@ -16,7 +16,8 @@ export function Page({ children }: Props) {
   return (
     <div className="w-full h-full min-h-screen bg-white dark:bg-offBlack">
       <Header />
-      <div className="px-8 pb-10 pt-8 mx-auto">
+
+      <div className="px-8 pb-10 mt-8 mx-auto">
         {children}
       </div>
     </div>

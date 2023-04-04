@@ -5,6 +5,23 @@ import { ButtonLink } from '@components/Button';
 import { Loader } from '@components/Loader';
 import { Nullable } from '@utils/types';
 import { useRecipes } from '@hooks';
+import { Carousel } from '@components/Carousel';
+import { Category, CategoryCard } from '@components/CategoryCard';
+
+const TEMP_CATEGORIES: Category[] = [
+  { icon: "🥕", title: "Soups" },
+  { icon: "🥕", title: "Sandwhiches" },
+  { icon: "🥕", title: "Burgers" },
+  { icon: "🥕", title: "Beef" },
+  { icon: "🥕", title: "Pork" },
+  { icon: "🥕", title: "Fish" },
+  { icon: "🥕", title: "Seafood" },
+  { icon: "🥕", title: "Appetizers" },
+  { icon: "🥕", title: "Desserts" },
+  { icon: "🥕", title: "Vegtables" },
+  { icon: "🥕", title: "Sweets" },
+  { icon: "🥕", title: "Family Favs" },
+]
 
 function Content({ recipes }: ApiBootData) {
   return (
@@ -13,10 +30,16 @@ function Content({ recipes }: ApiBootData) {
         <title>Recipe Generator</title>
         <meta name="description" content="Personal recipe Generator" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/logo/favicon_white.svg" />
       </Head>
 
       <main>
+        <Carousel title="Browse by Category">
+          {TEMP_CATEGORIES.map((category) => (
+            <CategoryCard category={category} />
+          ))}
+        </Carousel>
+
         <div className="flex justify-end mb-5">
           <ButtonLink href="/recipes/new" variant="primary">+ Create new recipe</ButtonLink>
         </div>

@@ -1,4 +1,4 @@
-export type ButtonVariant = 'primary' | 'secondary' | 'minimal' | 'redPrimary';
+export type ButtonVariant = 'primary' | 'secondary' | 'minimal' | 'link' | 'redPrimary';
 export type ButtonSize = 'sm' | 'md' | 'lg';
 
 type GetButtonStylesProps = {
@@ -20,6 +20,9 @@ function getVariantStyles(variant: ButtonVariant): string {
 
     case 'minimal':
       return 'bg-transparent text-gray-11 border border-gray-11';
+
+    case 'link':
+      return 'text-blue-6';
 
     case 'redPrimary':
       return 'bg-red-600 text-white';
