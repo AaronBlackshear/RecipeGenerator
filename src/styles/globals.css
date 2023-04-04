@@ -2,6 +2,62 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Font Stlyes */
+.title-1 {
+  @apply text-6xl leading-tight font-bold;
+}
+
+.title-2 {
+  @apply text-5xl leading-tight font-bold;
+}
+
+.title-3 {
+  @apply text-4xl leading-10 font-extrabold;
+}
+
+.headline {
+  @apply text-2xl leading-8 font-extrabold;
+}
+
+.subheadline {
+  @apply text-lg leading-8 font-bold;
+}
+
+.body {
+  @apply text-base font-normal;
+}
+
+.body-bold {
+  @apply text-base font-bold;
+}
+
+.body-small {
+  @apply text-sm leading-6 font-normal;
+}
+
+.body-small-bold {
+  @apply text-sm leading-6 font-bold;
+}
+
+.caption {
+  @apply text-xs font-semibold;
+}
+
+.button-lg {
+  @apply text-base font-semibold;
+}
+
+.button-md {
+  @apply text-sm leading-4 font-bold;
+}
+
+.button-sm {
+  @apply text-xs font-bold;
+}
+
+/* Font Stlyes */
+
+
 .ratio-standard {
   position: relative;
 }
