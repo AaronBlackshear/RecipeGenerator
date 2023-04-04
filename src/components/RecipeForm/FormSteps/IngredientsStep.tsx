@@ -26,7 +26,7 @@ export function IngredientsStep() {
             <li key={`${ingredient}_${i}`} className="flex items-center space-x-1">
               <span className="text-white">{ingredient}</span>
               <span>
-                <Button variant='minimal' size="sm" onClick={() => removeIngredient(i)}>X</Button>
+                <Button variant='link' size="sm" onClick={() => removeIngredient(i)}>X</Button>
               </span>
             </li>
           ))}
@@ -47,7 +47,7 @@ export function IngredientsStep() {
             <li key={`${ingredient}_${i}`} className="flex items-center space-x-1">
               <span className="text-white">{ingredient}</span>
               <span>
-                <Button variant='minimal' size="sm" onClick={() => removeIngredient(i, true)}>X</Button>
+                <Button variant='link' size="sm" onClick={() => removeIngredient(i, true)}>X</Button>
               </span>
             </li>
           ))}

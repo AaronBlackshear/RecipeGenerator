@@ -16,7 +16,7 @@ export function Button({ children, variant, size = 'md', icon, ...props }: Butto
   const buttonFontStyles = getFontSpacingStyles(size)
 
   return (
-    <button className={`flex items-center rounded-xl  ${buttonStyles}`} {...props}>
+    <button className={`flex items-center rounded-xl ${buttonStyles}`} {...props}>
       {icon && <Icon type={icon} size={size} />}
       {children && <span className={buttonFontStyles}>{children}</span>}
     </button>
