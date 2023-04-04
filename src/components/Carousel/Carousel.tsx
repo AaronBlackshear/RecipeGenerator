@@ -25,9 +25,9 @@ export function Carousel({ title, children }: Props) {
   return (
     <div>
       <section className="flex justify-between items-center mb-6">
-        <div className="flex justify-start items-center">
+        <div className="flex justify-start items-center space-x-4">
           <h4 className="headline">{title}</h4>
-          <ButtonLink href="#" variant="link" size='sm'>View All</ButtonLink>
+          <ButtonLink href="#" variant="link" size='noPadding'>View All</ButtonLink>
         </div>
 
         <div className="flex gap-x-2">

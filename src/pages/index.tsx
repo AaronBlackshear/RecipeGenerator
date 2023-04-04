@@ -36,7 +36,7 @@ function Content({ recipes }: ApiBootData) {
       <main>
         <Carousel title="Browse by Category">
           {TEMP_CATEGORIES.map((category) => (
-            <CategoryCard category={category} />
+            <CategoryCard key={category.title} category={category} />
           ))}
         </Carousel>
 

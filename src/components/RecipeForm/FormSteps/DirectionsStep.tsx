@@ -27,7 +27,7 @@ export function DirectionsStep({ }: Props) {
             <li key={i} className="flex items-center space-x-1">
               <span className="text-white">{direction}</span>
               <span>
-                <Button variant='minimal' size="sm" onClick={() => removeDirection(i)}>X</Button>
+                <Button variant='link' size="sm" onClick={() => removeDirection(i)}>X</Button>
               </span>
             </li>
           ))}

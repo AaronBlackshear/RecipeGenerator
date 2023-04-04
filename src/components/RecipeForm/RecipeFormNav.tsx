@@ -44,7 +44,7 @@ function RecipeFormNavItem({ isActive = false, step }: RecipeFormNavItemProps) {
 
   return (
     <li className={`${isActive ? 'opacity-100' : 'opacity-50'}`}>
-      <ButtonLink href={href} variant="minimal" size="sm">
+      <ButtonLink href={href} variant="link" size="sm">
         <span className="capitalize">{step}</span>
       </ButtonLink>
     </li>

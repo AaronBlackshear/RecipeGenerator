@@ -10,7 +10,7 @@ export function Header() {
   return (
     <header className="flex justify-between items-center px-8 py-4">
       <Link href="/" className="">
-        <Image src={isDark ? "/logo/logo_full_white.svg" : "/logo/logo_full_black.svg"} alt="Recipe Generator" height={35} width={260} />
+        <Image src={isDark ? '/logo/logo_full_white.svg' : '/logo/logo_full_black.svg'} alt="Recipe Generator" height={35} width={260} loading="lazy" />
       </Link>
 
       <div className="flex items-center justify-end gap-6">
