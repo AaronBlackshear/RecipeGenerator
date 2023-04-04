@@ -16,10 +16,10 @@ function getVariantStyles(variant: ButtonVariant): string {
       return 'bg-blue-5 text-white';
 
     case 'secondary':
-      return 'bg-white text-blue-600'
+      return 'bg-transparent text-blue-5 border border-gray-11'
 
     case 'minimal':
-      return 'bg-transparent text-white';
+      return 'bg-transparent text-gray-11 border border-gray-11';
 
     case 'redPrimary':
       return 'bg-red-600 text-white';

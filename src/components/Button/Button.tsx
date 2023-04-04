@@ -3,7 +3,7 @@ import { ButtonSize, ButtonVariant, getButtonStyles, getFontSpacingStyles } from
 import { Icon, IconType } from '@components/Icons';
 
 export type ButtonBaseProps = {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   variant: ButtonVariant;
   size?: ButtonSize;
   icon?: IconType;
@@ -16,9 +16,9 @@ export function Button({ children, variant, size = 'md', icon, ...props }: Butto
   const buttonFontStyles = getFontSpacingStyles(size)
 
   return (
-    <button className={`flex items-center rounded-xl ${buttonStyles}`} {...props}>
+    <button className={`flex items-center rounded-xl border border-gray-11 ${buttonStyles}`} {...props}>
       {icon && <Icon type={icon} size={size} />}
-      <span className={buttonFontStyles}>{children}</span>
+      {children && <span className={buttonFontStyles}>{children}</span>}
     </button>
   )
 }
