@@ -1,13 +1,16 @@
 import React from 'react'
-import { ButtonBaseProps, getButtonStyles } from '@components/Button';
+import { ButtonBaseProps, getButtonStyles, getFontSpacingStyles } from '@components/Button';
 import Link, { LinkProps } from 'next/link';
 
 type ButtonLinkProps = LinkProps & ButtonBaseProps;
 
-export function ButtonLink({ children, variant, size, ...props }: ButtonLinkProps) {
+export function ButtonLink({ children, variant, size = 'md', ...props }: ButtonLinkProps) {
   const buttonStyles = getButtonStyles({ variant, size })
+  const buttonFontStyles = getFontSpacingStyles(size)
 
   return (
-    <Link {...props} className={`rounded ${buttonStyles}`}>{children}</Link>
+    <Link {...props} className={`flex items-center rounded-xl ${buttonStyles}`}>
+      <span className={buttonFontStyles}>{children}</span>
+    </Link>
   )
 }

@@ -1,17 +1,19 @@
+import { ButtonLink } from '@components/Button';
+import { useTheme } from '@hooks'
+import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
 export function Header() {
+  const { isDark } = useTheme();
 
   return (
-    <div className="mb-4 pt-4 px-6">
-      <header className="flex justify-between max-w-3xl mx-auto border-b border-b-white pb-2">
-        <Link href="/">
-          <h3 className="text-white font-bold text-2xl">Recipe Generator</h3>
-        </Link>
+    <header className="flex justify-between items-center px-8 py-6">
+      <Link href="/" className="">
+        <Image src={isDark ? "/logo/logo_full_white.svg" : "/logo/logo_full_black.svg"} alt="Recipe Generator" height={35} width={260} />
+      </Link>
 
-        <Link href="/api/auth/logout" className="text-white">Logout</Link>
-      </header>
-    </div>
+      <ButtonLink variant='primary' size="md" href="/api/auth/logout">Logout</ButtonLink>
+    </header>
   )
 }
