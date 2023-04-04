@@ -27,5 +27,8 @@ function getIconSizeStyles(size: ButtonSize): string {
 
     case 'lg':
       return 'w-10 h-10';
+
+    case 'noPadding':
+      return 'w-8 h-8';
   }
 }
