@@ -7,6 +7,8 @@ import { Nullable } from '@utils/types';
 import { useRecipes } from '@hooks';
 import { Carousel } from '@components/Carousel';
 import { Category, CategoryCard } from '@components/CategoryCard';
+import { useEffect, useState } from 'react';
+import { RecipeCard } from '@components/RecipeCard';
 
 const TEMP_CATEGORIES: Category[] = [
   { icon: "🥕", title: "Soups" },
@@ -33,22 +35,24 @@ function Content({ recipes }: ApiBootData) {
         <link rel="icon" href="/logo/favicon_white.svg" />
       </Head>
 
-      <main>
-        <Carousel title="Browse by Category">
+      <main className="space-y-8">
+        <Carousel title="Browse by Category" viewAll="#">
           {TEMP_CATEGORIES.map((category) => (
             <CategoryCard key={category.title} category={category} />
           ))}
         </Carousel>
 
-        <div className="flex justify-end mb-5">
-          <ButtonLink href="/recipes/new" variant="primary">+ Create new recipe</ButtonLink>
-        </div>
-
-        <div className="flex flex-col gap-3">
-          {recipes.map(recipe => (
-            <RecipeCondensed key={recipe._id} recipe={recipe} />
+        <Carousel title="Recent Recipes" viewAll="#">
+          {recipes.map((recipe) => (
+            <RecipeCard key={recipe._id} recipe={recipe} />
           ))}
-        </div>
+        </Carousel>
+
+        <Carousel title="Favorite Recipes" viewAll="#">
+          {recipes.map((recipe) => (
+            <RecipeCard key={recipe._id} recipe={recipe} />
+          ))}
+        </Carousel>
       </main>
     </>
   )
@@ -61,6 +65,24 @@ export default function Page() {
 
   return <Content {...data} />
 }
+
+// export async function getStaticProps() {
+//   // Call an external API endpoint to get posts.
+//   // You can use any data fetching library
+//   const res = await axios.get('http://localhost:1337/api/recipes', {
+//     headers: {
+//       "Authorization": `Bearer ${process.env.STRAPI_API_TOKEN}`,
+//     }
+//   })
+//   console.log(res.data);
+
+//   // By returning { props: { posts } }, the Blog component
+//   // will receive `posts` as a prop at build time
+//   return {
+//     props: {
+//     },
+//   }
+// }
 
 type ApiBootData = {
   recipes: RecipeType[];

@@ -4,6 +4,8 @@ import { SunOutline } from '@components/Icons/SunOutline'
 import { MoonOutline } from '@components/Icons/MoonOutline'
 import { ArrowLeftOutline } from '@components/Icons/ArrowLeftOutline'
 import { ArrowRightOutline } from '@components/Icons/ArrowRightOutline'
+import { HeartOutline } from '@components/Icons/HeartOutline'
+import { HeartSolid } from '@components/Icons/HeartSolid'
 import { ButtonSize } from '@components/Button';
 
 export type IconProps = {
@@ -15,7 +17,9 @@ export type IconType =
   'sunOutline' |
   'moonOutline' |
   'arrowLeftOutline' |
-  'arrowRightOutline';
+  'arrowRightOutline' |
+  'heartOutline' |
+  'heartSolid';
 
 type Props = {
   type: IconType;
@@ -38,5 +42,11 @@ export function Icon({ type, size = "md" }: Props): JSX.Element {
 
     case 'arrowRightOutline':
       return <ArrowRightOutline size={size} />
+
+    case 'heartOutline':
+      return <HeartOutline size={size} />
+
+    case 'heartSolid':
+      return <HeartSolid size={size} />
   }
 }

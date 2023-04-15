@@ -1,6 +1,6 @@
 import classNames from "classnames";
 
-export type ButtonVariant = 'primary' | 'secondary' | 'link' | 'redPrimary' | 'redSecondary';
+export type ButtonVariant = 'primary' | 'secondary' | 'link' | 'redPrimary' | 'redSecondary' | 'favorite';
 export type ButtonSize = 'sm' | 'md' | 'lg' | 'noPadding';
 
 type GetButtonStylesProps = {
@@ -20,9 +20,9 @@ function getVariantStyles(variant: ButtonVariant): string {
     case 'secondary':
       return classNames(
         'bg-transparent',
-        'text-blue-5 dark:text-gray-8',
+        'text-blue-5',
         'border border-gray-8 outline-none outline-offset-0',
-        'hover:text-blue-6 dark:hover:text-blue-8 hover:border-blue-6 dark:hover:border-blue-8 focus:text-blue-3 dark:focus:text-blue-6 focus:border-blue-3 dark:focus:border-blue-6 focus:outline-blue-3 dark:focus:outline-blue-6 focus:outline-1',
+        'hover:text-blue-6 hover:border-blue-6 focus:text-blue-3 focus:border-blue-3 focus:outline-blue-3 focus:outline-1',
         'disabled:border-gray-11 disabled:text-blue-8'
       )
 
@@ -34,6 +34,15 @@ function getVariantStyles(variant: ButtonVariant): string {
 
     case 'redSecondary':
       return 'bg-transparent text-red-5 border border-gray-11 outline-none outline-offset-0 hover:text-red-6 hover:border-red-6 focus:text-red-3 focus:border-red-3 focus:outline-red-3 focus:outline-1 disabled:border-gray-11 disabled:text-red-8'
+
+    case 'favorite':
+      return classNames(
+        'bg-gray-11',
+        'text-red-3',
+        'outline-none outline-offset-0',
+        'hover:border-red-6 focus:border-red-3 focus:outline-red-3 focus:outline-1',
+        'disabled:border-gray-11 disabled:text-red-8'
+      )
   }
 }
 

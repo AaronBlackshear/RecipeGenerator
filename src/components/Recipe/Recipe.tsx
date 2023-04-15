@@ -16,7 +16,7 @@ export function Recipe({ recipe, directionsStartIndex = 0 }: Props) {
   const { image, title, servings, prep_time, cook_time, required_ingredients, optional_ingredients, directions } = recipe;
 
   return (
-    <div className="ratio-standard w-[768px] h-[1152px]">
+    <div className="ratio ratio-standard w-[768px] h-[1152px]">
       <div className="flex flex-col w-full h-full bg-[#efeae7] p-10">
         <section className="flex justify-start items-center gap-x-6 mb-6">
           <div className="w-48 h-48 rounded overflow-hidden relative">

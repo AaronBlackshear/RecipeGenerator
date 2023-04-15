@@ -67,3 +67,7 @@ export function getRecipeFormPreviousStepUrl(step: RecipeFormStep, slug?: string
       }
   }
 }
+
+export function getRecipeUrl(slug: string) {
+  return `/recipes/${slug}`
+}

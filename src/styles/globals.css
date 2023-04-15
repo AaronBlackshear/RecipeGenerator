@@ -58,8 +58,16 @@
 /* Font Stlyes */
 
 
-.ratio-standard {
+.ratio {
   position: relative;
+}
+
+.ratio>* {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }
 
 .ratio-standard::before {
@@ -69,12 +77,11 @@
   padding-top: calc((1800 / 1200) * 100%);
 }
 
-.ratio-standard>* {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+.ratio-square::before {
+  display: block;
+  content: "";
+  width: 100%;
+  padding-top: calc((1000 / 1000) * 100%);
 }
 
 .canvas-container>canvas {
