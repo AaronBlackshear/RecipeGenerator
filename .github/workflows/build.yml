@@ -1,4 +1,4 @@
-name: Next.js Build Integration
+name: Tests CI
 
 on:
   pull_request:
@@ -6,13 +6,13 @@ on:
     - main
     
 jobs:
-  test_pull_request:
+  test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
-          node-version: 12
+          node-version: 14
       - run: npm install
       - run: npm run tsc
       - run: npm run test:ci
