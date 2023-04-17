@@ -1,8 +1,8 @@
 import { RecipeForm } from '@components/RecipeForm'
 import { RecipeFormStep } from '@components/RecipeForm/RecipeFormNav';
 import React from 'react'
-import { RecipeType } from '@components/Recipe';
-import { useRecipe } from '@hooks/';
+import { RecipeType } from '@shared/types';
+import { useRecipe } from '@hooks/recipes';
 import { useRouter } from 'next/router';
 import { getQuerySlug } from '@utils/query';
 import { Nullable } from '@utils/types';

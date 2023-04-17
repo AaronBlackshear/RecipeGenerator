@@ -1,4 +1,5 @@
-import { Recipe, RecipeType } from '@components/Recipe';
+import { Recipe } from '@components/Recipe';
+import { RecipeType } from '@shared/types';
 import React, { useEffect } from 'react'
 import { toCanvas } from 'html-to-image';
 

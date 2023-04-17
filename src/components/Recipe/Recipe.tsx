@@ -1,7 +1,7 @@
-import { RecipeType } from '@components/Recipe';
 import Image from 'next/image';
 import React from 'react'
 import { DM_Serif_Display, Poppins, Playfair_Display } from 'next/font/google'
+import { RecipeType } from '@shared/types';
 
 const dmSerifDisplay = DM_Serif_Display({ weight: ['400'], subsets: ['latin'] });
 const poppins = Poppins({ weight: ['400'], subsets: ['latin'] });

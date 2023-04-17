@@ -5,7 +5,7 @@ import { RecipeFormNav, RecipeFormStep } from '@components/RecipeForm/RecipeForm
 import { RecipeFormContent } from '@components/RecipeForm/RecipeFormContent';
 import { StepNavigation } from './FormSteps/StepNavigation';
 import { FormStateProvider, useFormState, FormState } from '@components/RecipeForm/FormSteps/FormContext';
-import { RecipeType } from '@components/Recipe';
+import { RecipeType } from '@shared/types';
 import { useRouter } from 'next/router';
 
 type Props = {

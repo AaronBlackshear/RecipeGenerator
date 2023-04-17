@@ -1,7 +1,7 @@
 import React from 'react'
 import { useFormState } from '@components/RecipeForm/FormSteps/FormContext';
 import { Recipe } from '@components/Recipe/Recipe';
-import { RecipeType } from '@components/Recipe';
+import { RecipeType } from '@shared/types';
 import slugify from 'slugify';
 
 export function ReviewStep() {
