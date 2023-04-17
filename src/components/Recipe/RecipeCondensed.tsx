@@ -1,4 +1,4 @@
-import { RecipeType } from '@components/Recipe'
+import { RecipeType } from '@shared/types';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react'

@@ -19,20 +19,26 @@
     "jsx": "preserve",
     "incremental": true,
     "paths": {
-      "@components*": [
+      "@components/*": [
         "./src/components/*"
       ],
-      "@hooks": [
-        "./src/hooks"
-      ],
-      "@hooks*": [
+      "@hooks/*": [
         "./src/hooks/*"
       ],
-      "@styles*": [
+      "@styles/*": [
         "./src/styles/*"
       ],
-      "@utils*": [
+      "@utils/*": [
         "./src/utils/*"
+      ],
+      "@page_impls/*": [
+        "./src/page_impls/*"
+      ],
+      "@shared/*": [
+        "./src/shared/*"
+      ],
+      "@test_utils/*": [
+        "./src/test_utils/*"
       ],
       "root/*": [
         "./*"

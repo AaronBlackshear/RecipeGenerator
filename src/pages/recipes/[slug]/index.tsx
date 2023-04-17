@@ -3,13 +3,13 @@ import axios from 'axios';
 import React from 'react'
 import { toPng } from 'html-to-image';
 import download from 'downloadjs';
-import { RecipeType } from '@components/Recipe';
+import { RecipeType } from '@shared/types';
 import { Button, ButtonLink } from '@components/Button';
 import { useRouter } from 'next/router';
 import { getRecipeEditFormUrl } from '@utils/url_app';
 import { Loader } from '@components/Loader';
 import { Nullable } from '@utils/types';
-import { useRecipe } from '@hooks';
+import { useRecipe } from '@hooks/recipes';
 import { getQuerySlug } from '@utils/query';
 
 type Props = {

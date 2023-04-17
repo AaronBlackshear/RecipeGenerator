@@ -1,4 +1,4 @@
-import { RecipeType } from '@components/Recipe';
+import { RecipeType } from '@shared/types';
 import { Nullable } from '@utils/types';
 import { createContext, Dispatch, useContext, useReducer } from 'react';
 import { ImageType } from 'react-images-uploading';

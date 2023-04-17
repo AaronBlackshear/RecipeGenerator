@@ -1,5 +1,5 @@
 import { Button } from '@components/Button';
-import { RecipeType } from '@components/Recipe/types';
+import { RecipeType } from '@shared/types';
 import { getRecipeUrl } from '@utils/url_app';
 import classNames from 'classnames';
 import Image from 'next/image';
