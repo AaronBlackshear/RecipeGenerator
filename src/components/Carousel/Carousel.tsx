@@ -4,12 +4,10 @@ import { createPortal } from 'react-dom';
 import Slider from "react-slick";
 import { UrlObject } from 'url';
 
-// type CarouselType = 'category' | 'recipe';
-
 type Props = {
   title: string;
   children: React.ReactNode;
-  viewAll: string | UrlObject;
+  viewAll?: string | UrlObject;
 };
 
 export function Carousel({ title, children, viewAll }: Props) {
@@ -28,7 +26,7 @@ export function Carousel({ title, children, viewAll }: Props) {
       <section className="flex justify-between items-center mb-6">
         <div className="flex justify-start items-center space-x-4">
           <h4 className="headline">{title}</h4>
-          <ButtonLink href={viewAll} variant="link" size='noPadding'>View All</ButtonLink>
+          {viewAll && <ButtonLink href={viewAll} variant="link" size='noPadding'>View All</ButtonLink>}
         </div>
 
         <div className="flex gap-x-2">

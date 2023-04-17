@@ -1,13 +1,10 @@
 import Head from 'next/head'
-import { RecipeCondensed } from '@components/Recipe';
 import { RecipeType } from '@components/Recipe';
-import { ButtonLink } from '@components/Button';
 import { Loader } from '@components/Loader';
 import { Nullable } from '@utils/types';
-import { useRecipes } from '@hooks';
+import { useRecipes } from '@hooks/recipes';
 import { Carousel } from '@components/Carousel';
 import { Category, CategoryCard } from '@components/CategoryCard';
-import { useEffect, useState } from 'react';
 import { RecipeCard } from '@components/RecipeCard';
 
 const TEMP_CATEGORIES: Category[] = [

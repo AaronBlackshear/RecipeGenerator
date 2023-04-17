@@ -1,6 +1,5 @@
-import { Recipe, RecipeView } from '@components/Recipe';
+import { RecipeView } from '@components/Recipe';
 import axios from 'axios';
-import { GetServerSideProps } from 'next';
 import React from 'react'
 import { toPng } from 'html-to-image';
 import download from 'downloadjs';
@@ -8,11 +7,10 @@ import { RecipeType } from '@components/Recipe';
 import { Button, ButtonLink } from '@components/Button';
 import { useRouter } from 'next/router';
 import { getRecipeEditFormUrl } from '@utils/url_app';
-import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 import { Loader } from '@components/Loader';
 import { Nullable } from '@utils/types';
 import { useRecipe } from '@hooks';
-import { getQuerySlug } from '@utils';
+import { getQuerySlug } from '@utils/query';
 
 type Props = {
   recipe: RecipeType;
