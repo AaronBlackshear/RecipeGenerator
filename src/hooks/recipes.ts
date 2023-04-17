@@ -1,5 +1,5 @@
 import useSWR from "swr"
-import { fetcher } from '@hooks';
+import { fetcher } from '@hooks/swr';
 import { Maybe } from "@utils/types";
 
 export const useRecipe = (slug?: Maybe<string>) => {

@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import { RecipeType } from '@components/Recipe';
 import { Nullable } from '@utils/types';
-import { useRecipes } from '@hooks';
+import { useRecipes } from '@hooks/recipes';
 import { Carousel } from '@components/Carousel';
 import { Category, CategoryCard } from '@components/CategoryCard';
 import { RecipeCard } from '@components/RecipeCard';
