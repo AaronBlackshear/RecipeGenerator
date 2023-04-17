@@ -34,13 +34,22 @@
       "@utils*": [
         "./src/utils/*"
       ],
-    }
+      "root/*": [
+        "./*"
+      ]
+    },
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "jest.config.mjs"
+    "jest.config.mjs",
+    ".next/types/**/*.ts",
   ],
   "exclude": [
     "node_modules"
