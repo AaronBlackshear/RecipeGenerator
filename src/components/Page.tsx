@@ -1,7 +1,7 @@
 import React from 'react'
 import { Header } from '@components/Header';
 import { useUser } from '@auth0/nextjs-auth0/client';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 type Props = {
   children: React.ReactNode;

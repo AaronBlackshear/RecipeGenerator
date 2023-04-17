@@ -1,12 +1,16 @@
 import React from 'react'
-import { InfinitySpin } from 'react-loader-spinner'
+import { LineWave } from 'react-loader-spinner'
+import resolveConfig from 'tailwindcss/resolveConfig'
+import tailwindConfig from 'root/tailwind.config.js'
+
+const fullConfig = resolveConfig(tailwindConfig)
 
 export function Loader() {
   return (
     <div className="w-full h-full flex justify-center items-center">
-      <InfinitySpin
+      <LineWave
         width='200'
-        color="#4fa94d"
+        color={(fullConfig.theme?.colors?.['gray-2'] as string) || '#050406'}
       />
     </div>
   )

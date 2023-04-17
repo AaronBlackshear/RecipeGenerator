@@ -1,14 +1,11 @@
 import Head from 'next/head'
-import { RecipeCondensed } from '@components/Recipe';
 import { RecipeType } from '@components/Recipe';
-import { ButtonLink } from '@components/Button';
-import { Loader } from '@components/Loader';
 import { Nullable } from '@utils/types';
 import { useRecipes } from '@hooks';
 import { Carousel } from '@components/Carousel';
 import { Category, CategoryCard } from '@components/CategoryCard';
-import { useEffect, useState } from 'react';
 import { RecipeCard } from '@components/RecipeCard';
+import { ComponentOrLoader } from '@components/ComponentOrLoader';
 
 const TEMP_CATEGORIES: Category[] = [
   { icon: "🥕", title: "Soups" },
@@ -25,7 +22,9 @@ const TEMP_CATEGORIES: Category[] = [
   { icon: "🥕", title: "Family Favs" },
 ]
 
-function Content({ recipes }: ApiBootData) {
+export default function Content() {
+  const data = useApiBootData();
+
   return (
     <>
       <Head>
@@ -42,47 +41,13 @@ function Content({ recipes }: ApiBootData) {
           ))}
         </Carousel>
 
-        <Carousel title="Recent Recipes" viewAll="#">
-          {recipes.map((recipe) => (
-            <RecipeCard key={recipe._id} recipe={recipe} />
-          ))}
-        </Carousel>
+        <ComponentOrLoader data={data} Component={RecentRecipes} />
 
-        <Carousel title="Favorite Recipes" viewAll="#">
-          {recipes.map((recipe) => (
-            <RecipeCard key={recipe._id} recipe={recipe} />
-          ))}
-        </Carousel>
+        <ComponentOrLoader data={data} Component={RecentRecipes} />
       </main>
     </>
   )
 }
-
-export default function Page() {
-  const data = useApiBootData();
-
-  if (!data) return <Loader />
-
-  return <Content {...data} />
-}
-
-// export async function getStaticProps() {
-//   // Call an external API endpoint to get posts.
-//   // You can use any data fetching library
-//   const res = await axios.get('http://localhost:1337/api/recipes', {
-//     headers: {
-//       "Authorization": `Bearer ${process.env.STRAPI_API_TOKEN}`,
-//     }
-//   })
-//   console.log(res.data);
-
-//   // By returning { props: { posts } }, the Blog component
-//   // will receive `posts` as a prop at build time
-//   return {
-//     props: {
-//     },
-//   }
-// }
 
 type ApiBootData = {
   recipes: RecipeType[];
@@ -97,4 +62,15 @@ function useApiBootData(): Nullable<ApiBootData> {
   return {
     recipes,
   }
+}
+
+// TODO: Refactor
+function RecentRecipes({ recipes }: ApiBootData) {
+  return (
+    <Carousel title="Recent Recipes" viewAll="#">
+      {recipes.map((recipe) => (
+        <RecipeCard key={recipe._id} recipe={recipe} />
+      ))}
+    </Carousel>
+  )
 }
