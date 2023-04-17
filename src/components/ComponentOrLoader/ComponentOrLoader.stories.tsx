@@ -8,7 +8,7 @@ const meta: Meta<typeof ComponentOrLoader> = {
   tags: ['autodocs'],
   argTypes: {
     data: {
-      options: [null, {}],
+      options: [null, 'data'],
       control: { type: 'radio' },
     }
   },
@@ -19,8 +19,17 @@ type Story = StoryObj<typeof ComponentOrLoader>;
 
 // More on writing stories with args: https://storybook.js.org/docs/7.0/react/writing-stories/args
 export const Primary: Story = {
-  args: {
-    data: null,
-    children: <div>Hello world!</div>,
-  },
+  render: (args) => <ComponentOrLoaderWithControl loadingData={!args.data} />
 };
+
+function ComponentOrLoaderWithControl({ loadingData }: { loadingData: boolean }) {
+  return (
+    <ComponentOrLoader data={!loadingData ? { name: 'world' } : null} Component={DemoComponent} />
+  )
+}
+
+function DemoComponent({ name }: { name: string }) {
+  return (
+    <div>Hello {name}!</div>
+  )
+}
