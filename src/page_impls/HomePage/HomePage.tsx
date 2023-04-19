@@ -20,7 +20,7 @@ export function HomePage() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2">
           {data?.recentRecipes.map((recipe) => (
-            <RecipeCard recipe={recipe} />
+            <RecipeCard key={recipe._id} recipe={recipe} />
           ))}
         </div>
       </main>
