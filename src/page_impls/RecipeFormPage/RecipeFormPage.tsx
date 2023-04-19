@@ -55,12 +55,12 @@ type RecipePreviewProps = {
 function RecipePreview({ form }: RecipePreviewProps) {
   const formValues = form.watch()
   const recipe = useMemo(() => mockRecipe(formValues), [formValues])
-  const recipeDirectionPages = useMemo(() => separateRecipeDirections(recipe), [formValues]);
+  const recipeDirectionPages = useMemo(() => separateRecipeDirections(recipe), [recipe]);
 
   return (
     <div className="flex flex-col gap-y-3">
       {recipeDirectionPages.length ? recipeDirectionPages.map((page, i) => (
-        <Recipe recipe={buildRecipePage(recipe, page.directions)} directionsStartIndex={page.directionsIndex} />
+        <Recipe key={i} recipe={buildRecipePage(recipe, page.directions)} directionsStartIndex={page.directionsIndex} />
       )) : (
         <Recipe recipe={recipe} />
       )}
