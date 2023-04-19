@@ -5,7 +5,6 @@ import { useForm, UseFormReturn } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Recipe } from '@components/Recipe'
 import { RecipeForm } from '@components/RecipeForm'
-import { FormStateProvider } from '@components/RecipeForm/FormSteps/FormContext'
 import { buildRecipePage, separateRecipeDirections } from '@utils/recipe'
 import { RecipeType } from '@shared/types'
 import { Nullable } from '@utils/types';
@@ -38,16 +37,14 @@ export function RecipeFormPage({ recipe }: Props) {
   const showFullPreview = width >= 1280;
 
   return (
-    <FormStateProvider recipe={recipe}>
-      <div className="flex items-start gap-x-4">
-        <div className="flex-1 bg-gray-12 p-2 rounded-lg">
-          <RecipeForm form={form} />
-        </div>
-
-        {/* SHOW PREVIEW ON DESKTOP */}
-        {showFullPreview && <RecipePreview form={form} />}
+    <div className="flex items-start gap-x-4">
+      <div className="flex-1 bg-gray-12 p-2 rounded-lg">
+        <RecipeForm form={form} />
       </div>
-    </FormStateProvider>
+
+      {/* SHOW PREVIEW ON DESKTOP */}
+      {showFullPreview && <RecipePreview form={form} />}
+    </div>
   )
 }
 
