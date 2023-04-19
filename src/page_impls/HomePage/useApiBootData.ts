@@ -1,5 +1,5 @@
 import { RecipeType } from '@shared/types';
-import { useRecipes } from "@hooks/recipes";
+import { useRecipes } from "@hooks/recipe/queries";
 import { Nullable } from "@utils/types";
 
 export type ApiBootData = {

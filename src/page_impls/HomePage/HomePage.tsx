@@ -4,6 +4,8 @@ import { ComponentOrLoader } from "@components/ComponentOrLoader";
 import { useApiBootData } from "@page_impls/HomePage/useApiBootData";
 import Head from "next/head";
 import { RecentRecipes, FavoriteRecipes } from "@page_impls/HomePage/RecipeSliders";
+import { ButtonLink } from "@components/Button";
+import { getRecipeNewUrl } from "@utils/url_app";
 
 const TEMP_CATEGORIES: Category[] = [
   { icon: "🥕", title: "Soups" },
@@ -33,6 +35,10 @@ export function HomePage() {
       </Head>
 
       <main className="space-y-8">
+        <div className="w-full flex justify-end">
+          <ButtonLink href={getRecipeNewUrl()} variant="secondary">New Recipe</ButtonLink>
+        </div>
+
         <Carousel title="Browse by Category" viewAll="#">
           {TEMP_CATEGORIES.map((category) => (
             <CategoryCard key={category.title} category={category} />

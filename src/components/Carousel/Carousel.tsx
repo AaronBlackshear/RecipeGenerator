@@ -80,6 +80,6 @@ type ArrowProps = {
 
 function Arrow({ direction, onClick }: ArrowProps) {
   return (
-    <Button size="sm" variant="primary" onClick={onClick} icon={direction === 'prev' ? 'arrowLeftOutline' : 'arrowRightOutline'} />
+    <Button size="sm" variant="primary" onClick={onClick} iconLeft={direction === 'prev' ? 'arrowLeftOutline' : 'arrowRightOutline'} />
   )
 }

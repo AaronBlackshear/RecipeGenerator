@@ -6,7 +6,7 @@ export interface RecipeType {
   servings: number;
   prep_time: number;
   cook_time: number;
-  required_ingredients: string[];
-  optional_ingredients?: string[];
-  directions: string[];
+  required_ingredients: { value: string }[];
+  optional_ingredients?: { value: string }[];
+  directions: { value: string }[];
 }

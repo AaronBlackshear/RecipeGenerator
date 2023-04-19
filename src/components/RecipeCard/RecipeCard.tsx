@@ -30,7 +30,7 @@ export function RecipeCard({ recipe }: Props) {
 
         <div className="w-full flex justify-between items-center space-x-2">
           <p className="body-bold text-gray-2 overflow-ellipsis whitespace-nowrap overflow-hidden">{recipe.title}</p>
-          <Button variant="favorite" icon="heartOutline" size="sm" onClick={(e) => {
+          <Button variant="favorite" iconLeft="heartOutline" size="sm" onClick={(e) => {
             e.stopPropagation()
             e.preventDefault()
             // TODO: Handle Favorite

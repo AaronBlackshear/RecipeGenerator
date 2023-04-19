@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+input[type=number].appearance-none::-webkit-inner-spin-button,
+input[type=number].appearance-none::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number].appearance-none {
+  -moz-appearance: textfield;
+}
+
 /* Font Stlyes */
 .title-1 {
   @apply text-6xl leading-tight font-bold;
@@ -86,4 +96,12 @@
 
 .canvas-container>canvas {
   width: 100%;
+}
+
+.image-placeholder>div {
+  @apply w-16 h-16;
+}
+
+.image-placeholder>div>svg {
+  @apply w-16 h-16;
 }
