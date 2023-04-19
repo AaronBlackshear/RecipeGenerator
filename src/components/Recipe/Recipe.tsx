@@ -39,7 +39,7 @@ export function Recipe({ recipe, directionsStartIndex = 0 }: Props) {
             <Section isIngredients heading='Ingredients'>
               <ul className="list-disc list-inside">
                 {required_ingredients.map((ingredient, i) => (
-                  <li key={i}>{ingredient}</li>
+                  <li key={i}>{ingredient.value}</li>
                 ))}
               </ul>
 
@@ -48,7 +48,7 @@ export function Recipe({ recipe, directionsStartIndex = 0 }: Props) {
                   <h4 className="mb-1">Optional:</h4>
                   <ul className="list-disc list-inside">
                     {optional_ingredients.map((ingredient, i) => (
-                      <li key={i}>{ingredient}</li>
+                      <li key={i}>{ingredient.value}</li>
                     ))}
                   </ul>
                 </div>
@@ -60,7 +60,7 @@ export function Recipe({ recipe, directionsStartIndex = 0 }: Props) {
                 {directions.map((direction, i) => (
                   <li key={i} className="text-base flex space-x-2">
                     <p className="w-5 text-right">{directionsStartIndex + i + 1}.</p>
-                    <p className="flex-1">{direction}</p>
+                    <p className="flex-1">{direction.value}</p>
                   </li>
                 ))}
               </ol>

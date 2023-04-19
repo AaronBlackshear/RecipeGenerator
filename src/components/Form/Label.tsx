@@ -6,6 +6,6 @@ type Props = {
 
 export function Label({ children }: Props) {
   return (
-    <p className="text-white">{children}</p>
+    <p className="text-gray-3 mb-1">{children}</p>
   )
 }

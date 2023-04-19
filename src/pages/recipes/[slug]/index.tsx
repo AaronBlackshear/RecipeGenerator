@@ -9,7 +9,7 @@ import { useRouter } from 'next/router';
 import { getRecipeEditFormUrl } from '@utils/url_app';
 import { Loader } from '@components/Loader';
 import { Nullable } from '@utils/types';
-import { useRecipe } from '@hooks/recipes';
+import { useRecipe } from '@hooks/recipe/queries';
 import { getQuerySlug } from '@utils/query';
 
 type Props = {

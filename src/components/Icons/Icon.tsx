@@ -6,6 +6,12 @@ import { ArrowLeftOutline } from '@components/Icons/ArrowLeftOutline'
 import { ArrowRightOutline } from '@components/Icons/ArrowRightOutline'
 import { HeartOutline } from '@components/Icons/HeartOutline'
 import { HeartSolid } from '@components/Icons/HeartSolid'
+import { ArrowUpTrayOutline } from '@components/Icons/ArrowUpTrayOutline'
+import { XMarkOutline } from '@components/Icons/XMarkOutline'
+import { PhotoSolid } from '@components/Icons/PhotoSolid'
+import { ChevronUpMiniOutline } from '@components/Icons/ChevronUpMiniOutline'
+import { ChevronDownMiniOutline } from '@components/Icons/ChevronDownMiniOutline'
+import { TrashOutline } from '@components/Icons/TrashOutline'
 import { ButtonSize } from '@components/Button';
 
 export type IconProps = {
@@ -19,7 +25,13 @@ export type IconType =
   'arrowLeftOutline' |
   'arrowRightOutline' |
   'heartOutline' |
-  'heartSolid';
+  'heartSolid' |
+  'arrowUpTrayOutline' |
+  'xMarkOutline' |
+  'photoSolid' |
+  'chevronUpMiniOutline' |
+  'chevronDownMiniOutline' |
+  'trashOutline';
 
 type Props = {
   type: IconType;
@@ -48,5 +60,23 @@ export function Icon({ type, size = "md" }: Props): JSX.Element {
 
     case 'heartSolid':
       return <HeartSolid size={size} />
+
+    case 'arrowUpTrayOutline':
+      return <ArrowUpTrayOutline size={size} />
+
+    case 'xMarkOutline':
+      return <XMarkOutline size={size} />
+
+    case 'photoSolid':
+      return <PhotoSolid size={size} />
+
+    case 'chevronUpMiniOutline':
+      return <ChevronUpMiniOutline size={size} />
+
+    case 'chevronDownMiniOutline':
+      return <ChevronDownMiniOutline size={size} />
+
+    case 'trashOutline':
+      return <TrashOutline size={size} />
   }
 }
