@@ -9,7 +9,7 @@ import { Button } from '@components/Button';
 import { FormInputs } from '@page_impls/RecipeFormPage';
 import { capitalize } from '@utils/index';
 import { InputRow } from '@components/Form';
-import { createRecipe } from '@hooks/recipe/mutations';
+import { useCreateRecipe } from '@hooks/recipe/mutations';
 import { RecipeType } from '@shared/types';
 
 type Props = {
@@ -19,7 +19,7 @@ type Props = {
 export function RecipeForm({ form }: Props) {
   const router = useRouter();
 
-  const triggerCreateRecipe = createRecipe()
+  const createRecipe = useCreateRecipe()
 
   const { handleSubmit, control, formState: { errors, isValid } } = form;
   const { fields: requiredIngredientFields, append: appendRequiredIngredient, remove: removeRequiredIngredient } = useFieldArray({
@@ -38,7 +38,7 @@ export function RecipeForm({ form }: Props) {
     const formattedRecipe = formatRecipe(formInputs);
 
     try {
-      await triggerCreateRecipe({ recipe: formattedRecipe })
+      await createRecipe({ recipe: formattedRecipe })
       router.push(`/recipes/${formattedRecipe.slug}`)
     } catch (err: any) {
       toast.error(err.response.data.message);
@@ -86,7 +86,7 @@ export function RecipeForm({ form }: Props) {
           <Label>Required Ingredients</Label>
           <div className="flex flex-col space-y-2 mb-3">
             {requiredIngredientFields.map((item, index) => (
-              <div className="flex items-center space-x-2 p-1">
+              <div key={index} className="flex items-center space-x-2 p-1">
                 <Controller
                   key={item.id}
                   name={`requiredIngredients.${index}.value`}
@@ -113,7 +113,7 @@ export function RecipeForm({ form }: Props) {
           <Label>Optional Ingredients</Label>
           <div className="flex flex-col space-y-2 mb-3">
             {optionalIngredientFields.map((item, index) => (
-              <div className="flex items-center space-x-2 p-1">
+              <div key={index} className="flex items-center space-x-2 p-1">
                 <Controller
                   key={item.id}
                   name={`optionalIngredients.${index}.value`}
@@ -142,7 +142,7 @@ export function RecipeForm({ form }: Props) {
           <Label>Directions</Label>
           <div className="flex flex-col space-y-2 mb-3">
             {directionFields.map((item, index) => (
-              <div className="flex justify-start items-center space-x-2 p-1">
+              <div key={index} className="flex justify-start items-center space-x-2 p-1">
                 <Controller
                   key={item.id}
                   name={`directions.${index}.value`}
