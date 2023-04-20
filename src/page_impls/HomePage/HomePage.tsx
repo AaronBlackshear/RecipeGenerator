@@ -1,26 +1,7 @@
-import { Carousel } from "@components/Carousel";
-import { Category, CategoryCard } from "@components/CategoryCard";
-import { ComponentOrLoader } from "@components/ComponentOrLoader";
 import { useApiBootData } from "@page_impls/HomePage/useApiBootData";
 import Head from "next/head";
-import { RecentRecipes, FavoriteRecipes } from "@page_impls/HomePage/RecipeSliders";
-import { ButtonLink } from "@components/Button";
-import { getRecipeNewUrl } from "@utils/url_app";
-
-const TEMP_CATEGORIES: Category[] = [
-  { icon: "🥕", title: "Soups" },
-  { icon: "🥕", title: "Sandwhiches" },
-  { icon: "🥕", title: "Burgers" },
-  { icon: "🥕", title: "Beef" },
-  { icon: "🥕", title: "Pork" },
-  { icon: "🥕", title: "Fish" },
-  { icon: "🥕", title: "Seafood" },
-  { icon: "🥕", title: "Appetizers" },
-  { icon: "🥕", title: "Desserts" },
-  { icon: "🥕", title: "Vegtables" },
-  { icon: "🥕", title: "Sweets" },
-  { icon: "🥕", title: "Family Favs" },
-]
+import { RecipeCard } from "@components/RecipeCard";
+import { FilterBar } from "@components/FilterBar";
 
 export function HomePage() {
   const data = useApiBootData();
@@ -35,19 +16,13 @@ export function HomePage() {
       </Head>
 
       <main className="space-y-8">
-        <div className="w-full flex justify-end">
-          <ButtonLink href={getRecipeNewUrl()} variant="secondary">New Recipe</ButtonLink>
-        </div>
+        <FilterBar />
 
-        <Carousel title="Browse by Category" viewAll="#">
-          {TEMP_CATEGORIES.map((category) => (
-            <CategoryCard key={category.title} category={category} />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2">
+          {data?.recentRecipes.map((recipe) => (
+            <RecipeCard key={recipe._id} recipe={recipe} />
           ))}
-        </Carousel>
-
-        <ComponentOrLoader data={data ? { recipes: data.recentRecipes } : null} Component={RecentRecipes} />
-
-        <ComponentOrLoader data={data ? { recipes: data.recentRecipes } : null} Component={FavoriteRecipes} />
+        </div>
       </main>
     </>
   )

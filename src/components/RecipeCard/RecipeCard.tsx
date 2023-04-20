@@ -1,4 +1,3 @@
-import { Button } from '@components/Button';
 import { RecipeType } from '@shared/types';
 import { getRecipeUrl } from '@utils/url_app';
 import classNames from 'classnames';
@@ -13,13 +12,19 @@ type Props = {
 export function RecipeCard({ recipe }: Props) {
   return (
     <Link href={getRecipeUrl(recipe.slug)} className={classNames(
-      "flex flex-col w-64 rounded-2xl overflow-hidden bg-gray-12 mx-1",
+      "flex h-20 rounded-2xl overflow-hidden bg-gray-12 justify-start items-center",
     )}>
-      <section className="ratio ratio-square w-full rounded overflow-hidden relative">
+      <section className="ratio ratio-square h-full w-20 overflow-hidden relative">
         <Image src={recipe.image} alt={recipe.title} fill className='object-cover' />
       </section>
 
-      <section className="p-4 space-y-2">
+      <section className="p-2 space-y-1">
+        <div className="flex justify-between items-center space-x-2">
+          <p className="body-bold text-gray-2">
+            {recipe.title}
+          </p>
+        </div>
+
         <p className="caption text-gray-6">
           <span>6 servings</span>
           <span> | </span>
@@ -27,15 +32,6 @@ export function RecipeCard({ recipe }: Props) {
           <span> | </span>
           <span>35min Cook</span>
         </p>
-
-        <div className="w-full flex justify-between items-center space-x-2">
-          <p className="body-bold text-gray-2 overflow-ellipsis whitespace-nowrap overflow-hidden">{recipe.title}</p>
-          <Button variant="favorite" iconLeft="heartOutline" size="sm" onClick={(e) => {
-            e.stopPropagation()
-            e.preventDefault()
-            // TODO: Handle Favorite
-          }} />
-        </div>
       </section>
     </Link>
   )
