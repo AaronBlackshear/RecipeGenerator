@@ -1,7 +1,5 @@
-import React from 'react'
 import { Header } from '@components/Header';
-import { useUser } from '@auth0/nextjs-auth0/client';
-import { useRouter } from 'next/navigation';
+import React from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -10,11 +8,6 @@ type Props = {
 }
 
 export function Page({ children }: Props) {
-  const router = useRouter();
-  const { user, isLoading } = useUser();
-
-  if (!user && !isLoading) router.push('/api/auth/login')
-
   return (
     <div className="w-full h-full min-h-screen bg-white">
       <Header />
