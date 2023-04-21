@@ -4,7 +4,7 @@ import { Combobox } from '@headlessui/react';
 import { useRecipes } from '@hooks/recipe/queries';
 import { Recipe } from '@prisma/client';
 import { Nullable } from '@utils/types';
-import { getRecipeNewUrl, getRecipeUrl } from '@utils/url_app';
+import { getRecipeEditUrl, getRecipeNewUrl } from '@utils/url_app';
 import debounce from 'lodash.debounce';
 import { useRouter } from 'next/router';
 import React, { useMemo, useState } from 'react';
@@ -26,7 +26,7 @@ export function Search() {
     <Combobox value={selectedValue} onChange={(recipe) => {
       if (isLoading) return;
       setSelectedValue(recipe);
-      if (recipe) router.push(getRecipeUrl(recipe.slug))
+      if (recipe) router.push(getRecipeEditUrl(recipe.slug))
       else router.push(getRecipeNewUrl())
     }}>
       <div className="relative w-full max-w-xs">

@@ -10,7 +10,7 @@ export type ApiBootData = {
 
 export function useApiBootData(): Nullable<ApiBootData> {
   const { query } = useRouter();
-  const { recipe, isLoading, isError } = useRecipe(query.slug ? getQuerySlug(query) : undefined);
+  const { recipe, isLoading, isError } = useRecipe(getQuerySlug(query) || '');
 
   if (isLoading || !recipe) return null;
   if (isError) throw new Error(isError);

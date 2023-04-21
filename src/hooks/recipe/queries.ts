@@ -1,9 +1,9 @@
 import { fetcher } from '@lib/fetcher';
 import { Recipe } from '@prisma/client';
-import { Maybe } from "@utils/types";
+import { Nullable } from '@utils/types';
 import useSWR from "swr";
 
-export const useRecipe = (slug?: Maybe<string>) => {
+export const useRecipe = (slug: Nullable<string>) => {
   const { data, error, isLoading } = useSWR(slug ? `/api/recipes/${slug}` : undefined, fetcher)
 
   return {

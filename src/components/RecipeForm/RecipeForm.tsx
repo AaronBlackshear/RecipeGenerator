@@ -2,12 +2,12 @@ import { useUser } from '@auth0/nextjs-auth0/client';
 import { Button } from '@components/Button';
 import { Input, InputRow, Label } from '@components/Form';
 import { ImageUpload } from '@components/RecipeForm/ImageUpload';
-import { createRecipe } from '@hooks/recipe/mutations';
+import { createRecipe, updateRecipe } from '@hooks/recipe/mutations';
 import { FormInputs } from '@page_impls/RecipeFormPage';
 import { NewRecipe } from '@shared/types';
 import { capitalize } from '@utils/index';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useState } from 'react';
 import { Controller, SubmitHandler, UseFormReturn, useFieldArray } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import slugify from 'slugify';
@@ -19,6 +19,7 @@ type Props = {
 export function RecipeForm({ form }: Props) {
   const router = useRouter();
   const { user } = useUser();
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
 
   const { handleSubmit, control, formState: { errors, isValid } } = form;
   const { fields: requiredIngredientFields, append: appendRequiredIngredient, remove: removeRequiredIngredient } = useFieldArray({
@@ -33,15 +34,23 @@ export function RecipeForm({ form }: Props) {
     control,
     name: "directions",
   });
+
   const onSubmit: SubmitHandler<FormInputs> = async (formInputs) => {
     const formattedRecipe = formatRecipe(formInputs);
+    setIsSubmitting(true)
 
     try {
-      await createRecipe(formattedRecipe)
-      router.push(`/recipes/${formattedRecipe.slug}`)
+      if (formInputs.id) {
+        await updateRecipe({ id: formInputs.id, ...formattedRecipe })
+        toast.success('Recipe Updated!')
+      } else {
+        await createRecipe(formattedRecipe)
+        router.push('/')
+      }
     } catch (err: any) {
       toast.error(err.response.data.message);
     }
+    setIsSubmitting(false)
   }
 
   return (
@@ -165,7 +174,7 @@ export function RecipeForm({ form }: Props) {
         </div>
       </InputRow>
 
-      <Button variant="primary" type="submit" fullWidth disabled={!isValid}>Submit</Button>
+      <Button variant="primary" type="submit" fullWidth disabled={!isValid || isSubmitting}>Submit</Button>
     </form>
   )
 
