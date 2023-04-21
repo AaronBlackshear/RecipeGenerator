@@ -1,8 +1,8 @@
-import useSWRMutation from 'swr/mutation'
-import { creator } from '@hooks/swr';
+import { createFetcher } from '@hooks/swr';
+import useSWRMutation from 'swr/mutation';
 
 export const useCreateRecipe = () => {
-  const { trigger } = useSWRMutation(`/api/recipes/new`, creator)
+  const { trigger } = useSWRMutation(`/api/recipes/new`, createFetcher)
 
   return trigger;
 }

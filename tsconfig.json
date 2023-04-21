@@ -40,6 +40,9 @@
       "@test_utils/*": [
         "./src/test_utils/*"
       ],
+      "@lib/*": [
+        "./src/lib/*"
+      ],
       "root/*": [
         "./*"
       ]
