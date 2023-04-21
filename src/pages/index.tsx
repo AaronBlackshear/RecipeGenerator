@@ -1,3 +1,4 @@
+import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 import { HomePage } from '@page_impls/HomePage';
 
 export default function Page() {
@@ -5,3 +6,5 @@ export default function Page() {
     <HomePage />
   )
 }
+
+export const getServerSideProps = withPageAuthRequired();
