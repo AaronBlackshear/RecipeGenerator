@@ -16,7 +16,7 @@ export function Search() {
   const [selectedValue, setSelectedValue] = useState<Nullable<Recipe>>(null);
   const [searchValue, setSearchValue] = useState<string>();
 
-  const data = useRecipes({ search: searchValue });
+  const { recipes, isLoading } = useRecipes({ search: searchValue });
 
   const debouncedChangeHandler = useMemo(
     () => debounce(((event: React.ChangeEvent<HTMLInputElement>) => setSearchValue(event.target.value)), 300)
@@ -24,6 +24,7 @@ export function Search() {
 
   return (
     <Combobox value={selectedValue} onChange={(recipe) => {
+      if (isLoading) return;
       setSelectedValue(recipe);
       if (recipe) router.push(getRecipeUrl(recipe.slug))
       else router.push(getRecipeNewUrl())
@@ -41,14 +42,18 @@ export function Search() {
           }}
         />
         <Combobox.Options className="absolute z-10 top-16 w-full bg-gray-12 drop-shadow-md rounded-2xl py-4 list-none">
-          {data?.recipes?.length > 0 ? (
-            data?.recipes?.map((recipe) => (
-              <SearchItem value={recipe}>
-                {recipe.title}
-              </SearchItem>
-            ))
+          {!isLoading ? (
+            recipes?.length > 0 ? (
+              recipes?.map((recipe) => (
+                <SearchItem key={recipe.id} value={recipe}>
+                  {recipe.title}
+                </SearchItem>
+              ))
+            ) : (
+              <SearchItem value={null}>+ Create new recipe</SearchItem>
+            )
           ) : (
-            <SearchItem value={null}>+ Create new recipe</SearchItem>
+            <SearchItem value={null}>Loading...</SearchItem>
           )}
         </Combobox.Options>
       </div>
