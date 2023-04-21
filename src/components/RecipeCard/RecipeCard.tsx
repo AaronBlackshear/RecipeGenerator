@@ -1,5 +1,5 @@
 import { Recipe } from '@prisma/client';
-import { getRecipeUrl } from '@utils/url_app';
+import { getRecipeEditUrl } from '@utils/url_app';
 import classNames from 'classnames';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -11,7 +11,7 @@ type Props = {
 
 export function RecipeCard({ recipe }: Props) {
   return (
-    <Link href={getRecipeUrl(recipe.slug)} className={classNames(
+    <Link href={getRecipeEditUrl(recipe.slug)} className={classNames(
       "flex h-20 rounded-2xl overflow-hidden bg-gray-12 justify-start items-center",
     )}>
       <section className="ratio ratio-square h-full w-20 overflow-hidden relative">

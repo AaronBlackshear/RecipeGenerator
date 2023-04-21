@@ -11,6 +11,7 @@ import { UseFormReturn, useForm } from 'react-hook-form';
 import slugify from 'slugify';
 
 export type FormInputs = {
+  id?: string;
   title: string;
   image: Nullable<string>;
   servings: number;
@@ -89,6 +90,7 @@ function RecipePreview({ form }: RecipePreviewProps) {
 function getInitialFormState(recipe?: Recipe): FormInputs {
   if (recipe) {
     return {
+      id: recipe.id,
       image: recipe.image,
       title: recipe.title,
       servings: recipe.servings,

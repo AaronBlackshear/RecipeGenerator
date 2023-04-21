@@ -2,7 +2,7 @@ import { Button, ButtonLink } from '@components/Button';
 import { Loader } from '@components/Loader';
 import { RecipeView } from '@components/Recipe';
 import { useApiBootData } from '@page_impls/RecipeShowPage/useApiBootData';
-import { getRecipeEditFormUrl } from '@utils/url_app';
+import { getRecipeEditUrl } from '@utils/url_app';
 import axios from 'axios';
 import download from 'downloadjs';
 import { toPng } from 'html-to-image';
@@ -25,7 +25,7 @@ export function RecipePage() {
           Delete
         </Button>
 
-        <ButtonLink variant="secondary" href={getRecipeEditFormUrl(recipe.slug)}>
+        <ButtonLink variant="secondary" href={getRecipeEditUrl(recipe.slug)}>
           Edit
         </ButtonLink>
 
