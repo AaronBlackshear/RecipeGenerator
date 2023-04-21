@@ -1,7 +1,6 @@
 import { FilterBar } from "@components/FilterBar";
 import { RecipeCard } from "@components/RecipeCard";
 import { useApiBootData } from "@page_impls/HomePage/useApiBootData";
-import { log } from "console";
 import Head from "next/head";
 
 export function HomePage() {
