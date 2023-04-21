@@ -1,19 +1,19 @@
+import { Recipe } from '@prisma/client';
+import { DM_Serif_Display, Playfair_Display, Poppins } from 'next/font/google';
 import Image from 'next/image';
-import React from 'react'
-import { DM_Serif_Display, Poppins, Playfair_Display } from 'next/font/google'
-import { RecipeType } from '@shared/types';
+import React from 'react';
 
 const dmSerifDisplay = DM_Serif_Display({ weight: ['400'], subsets: ['latin'] });
 const poppins = Poppins({ weight: ['400'], subsets: ['latin'] });
 const playfairDisplay = Playfair_Display({ weight: ['400'], subsets: ['latin'] });
 
 type Props = {
-  recipe: RecipeType;
+  recipe: Recipe;
   directionsStartIndex?: number;
 };
 
-export function Recipe({ recipe, directionsStartIndex = 0 }: Props) {
-  const { image, title, servings, prep_time, cook_time, required_ingredients, optional_ingredients, directions } = recipe;
+export function RecipePage({ recipe, directionsStartIndex = 0 }: Props) {
+  const { image, title, servings, prepTime, cookTime, requiredIngredients, optionalIngredients, directions } = recipe;
 
   return (
     <div className="ratio ratio-standard w-[768px] h-[1152px]">
@@ -31,24 +31,24 @@ export function Recipe({ recipe, directionsStartIndex = 0 }: Props) {
         <section className="flex flex-col flex-1 bg-[#f7f5f4] w-full p-6 pt-3">
           <div className={`${poppins.className} flex justify-between items-center pb-2 mb-2 border-b border-b-gray-400`}>
             <p className="text-base flex-1 text-left">Servings: {servings}</p>
-            <p className="flex-1 text-center">Prepping Time: {prep_time} min</p>
-            <p className="flex-1 text-right">Cooking Time: {cook_time} min</p>
+            <p className="flex-1 text-center">Prepping Time: {prepTime} min</p>
+            <p className="flex-1 text-right">Cooking Time: {cookTime} min</p>
           </div>
 
           <div className={`${playfairDisplay.className} flex flex-row flex-1 gap-x-8`}>
             <Section isIngredients heading='Ingredients'>
               <ul className="list-disc list-inside">
-                {required_ingredients.map((ingredient, i) => (
-                  <li key={i}>{ingredient.value}</li>
+                {requiredIngredients.map((ingredient, i) => (
+                  <li key={i}>{ingredient}</li>
                 ))}
               </ul>
 
-              {optional_ingredients?.length ? (
+              {optionalIngredients?.length ? (
                 <div className="mt-8">
                   <h4 className="mb-1">Optional:</h4>
                   <ul className="list-disc list-inside">
-                    {optional_ingredients.map((ingredient, i) => (
-                      <li key={i}>{ingredient.value}</li>
+                    {optionalIngredients.map((ingredient, i) => (
+                      <li key={i}>{ingredient}</li>
                     ))}
                   </ul>
                 </div>
@@ -60,7 +60,7 @@ export function Recipe({ recipe, directionsStartIndex = 0 }: Props) {
                 {directions.map((direction, i) => (
                   <li key={i} className="text-base flex space-x-2">
                     <p className="w-5 text-right">{directionsStartIndex + i + 1}.</p>
-                    <p className="flex-1">{direction.value}</p>
+                    <p className="flex-1">{direction}</p>
                   </li>
                 ))}
               </ol>

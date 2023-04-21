@@ -5,6 +5,6 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<any>
 ) {
-  const recipes = await prisma.recipes.findMany()
+  const recipes = await prisma.recipe.findMany()
   res.status(200).json({ recipes })
 }

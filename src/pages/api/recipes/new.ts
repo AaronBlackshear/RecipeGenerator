@@ -8,6 +8,6 @@ export default async function handler(
 ) {
   if (!validateRecipeFormat(req.body.recipe)) res.status(400).json({ message: "Invalid recipe format" })
 
-  const recipes = await prisma.recipes.create({ data: req.body.recipe });
+  const recipes = await prisma.recipe.create({ data: req.body.recipe });
   res.status(200).json({ recipes })
 }

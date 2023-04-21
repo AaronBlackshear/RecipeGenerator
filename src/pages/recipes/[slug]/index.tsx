@@ -1,5 +1,5 @@
 import { withPageAuthRequired } from '@auth0/nextjs-auth0';
-import { RecipePage } from '@page_impls/RecipePage';
+import { RecipePage } from '@page_impls/RecipeShowPage';
 
 export default function Page() {
   return (

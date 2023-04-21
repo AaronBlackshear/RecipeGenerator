@@ -1,11 +1,11 @@
 import { useRecipe } from "@hooks/recipe/queries";
-import { RecipeType } from "@shared/types";
+import { Recipe } from "@prisma/client";
 import { getQuerySlug } from "@utils/query";
 import { Nullable } from "@utils/types";
 import { useRouter } from "next/router";
 
 export type ApiBootData = {
-  recipe: RecipeType;
+  recipe: Recipe;
 }
 
 export function useApiBootData(): Nullable<ApiBootData> {

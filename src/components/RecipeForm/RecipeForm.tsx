@@ -1,16 +1,16 @@
-import React from 'react'
-import { useRouter } from 'next/router';
-import slugify from 'slugify';
-import { toast } from 'react-toastify';
-import { ImageUpload } from '@components/RecipeForm/ImageUpload';
-import { Input, Label } from '@components/Form';
-import { SubmitHandler, Controller, UseFormReturn, useFieldArray, FieldArrayWithId, Control } from 'react-hook-form';
+import { useUser } from '@auth0/nextjs-auth0/client';
 import { Button } from '@components/Button';
+import { Input, InputRow, Label } from '@components/Form';
+import { ImageUpload } from '@components/RecipeForm/ImageUpload';
+import { createRecipe } from '@hooks/recipe/mutations';
 import { FormInputs } from '@page_impls/RecipeFormPage';
+import { NewRecipe } from '@shared/types';
 import { capitalize } from '@utils/index';
-import { InputRow } from '@components/Form';
-import { useCreateRecipe } from '@hooks/recipe/mutations';
-import { RecipeType } from '@shared/types';
+import { useRouter } from 'next/router';
+import React from 'react';
+import { Controller, SubmitHandler, UseFormReturn, useFieldArray } from 'react-hook-form';
+import { toast } from 'react-toastify';
+import slugify from 'slugify';
 
 type Props = {
   form: UseFormReturn<FormInputs>;
@@ -18,8 +18,7 @@ type Props = {
 
 export function RecipeForm({ form }: Props) {
   const router = useRouter();
-
-  const createRecipe = useCreateRecipe()
+  const { user } = useUser();
 
   const { handleSubmit, control, formState: { errors, isValid } } = form;
   const { fields: requiredIngredientFields, append: appendRequiredIngredient, remove: removeRequiredIngredient } = useFieldArray({
@@ -38,7 +37,7 @@ export function RecipeForm({ form }: Props) {
     const formattedRecipe = formatRecipe(formInputs);
 
     try {
-      await createRecipe({ recipe: formattedRecipe })
+      await createRecipe(formattedRecipe)
       router.push(`/recipes/${formattedRecipe.slug}`)
     } catch (err: any) {
       toast.error(err.response.data.message);
@@ -170,19 +169,21 @@ export function RecipeForm({ form }: Props) {
     </form>
   )
 
-  function formatRecipe(recipe: FormInputs): Partial<RecipeType> {
+  function formatRecipe(recipe: FormInputs): NewRecipe {
     if (!recipe.image) throw new Error('Missing Image!');
+    if (!user?.sub) throw new Error('Missing User ID!');
 
     return ({
+      userId: user.sub,
       title: recipe.title,
       slug: slugify(recipe.title),
       image: recipe.image,
       servings: recipe.servings,
-      prep_time: recipe.prepTime,
-      cook_time: recipe.cookTime,
-      required_ingredients: recipe.requiredIngredients,
-      optional_ingredients: recipe?.optionalIngredients?.length ? recipe.optionalIngredients : undefined,
-      directions: recipe.directions,
+      prepTime: recipe.prepTime,
+      cookTime: recipe.cookTime,
+      requiredIngredients: recipe.requiredIngredients.map(({ value }) => value),
+      optionalIngredients: recipe.optionalIngredients.map(({ value }) => value),
+      directions: recipe.directions.map(({ value }) => value),
     })
   }
 }
