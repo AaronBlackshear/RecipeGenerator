@@ -19,11 +19,10 @@ type UseRecipes = {
   isError: any;
 }
 
-export const useRecipes = (): UseRecipes => {
-  const { data, error, isLoading } = useSWR(`/api/recipes`, fetcher)
+export const useRecipes = ({ search }: { search?: string } = {}): UseRecipes => {
+  const url = `/api/recipes${search ? `?search=${encodeURI(search)}` : ''}`
 
-  console.log(data);
-
+  const { data, error, isLoading } = useSWR(url, fetcher)
 
   return {
     recipes: data?.recipes,
