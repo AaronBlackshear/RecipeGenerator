@@ -1,0 +1,33 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+type RecipesDirections {
+  value String
+}
+
+type RecipesOptionalIngredients {
+  value String
+}
+
+type RecipesRequiredIngredients {
+  value String
+}
+
+model recipes {
+  id                   String                       @id @default(auto()) @map("_id") @db.ObjectId
+  cook_time            Int
+  directions           RecipesDirections[]
+  image                String
+  optional_ingredients RecipesOptionalIngredients[]
+  prep_time            Int
+  required_ingredients RecipesRequiredIngredients[]
+  servings             Int
+  slug                 String
+  title                String
+}
