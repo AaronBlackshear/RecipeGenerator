@@ -1,11 +1,11 @@
-import { Recipe } from '@components/Recipe';
-import { RecipeType } from '@shared/types';
-import React, { useEffect } from 'react'
-import { toCanvas } from 'html-to-image';
+import { RecipePage } from '@components/Recipe';
+import { Recipe } from '@prisma/client';
 import { buildRecipePage, separateRecipeDirections } from '@utils/recipe';
+import { toCanvas } from 'html-to-image';
+import React, { useEffect } from 'react';
 
 type Props = {
-  recipe: RecipeType;
+  recipe: Recipe;
 };
 
 export function RecipeView({ recipe }: Props) {
@@ -37,7 +37,7 @@ export function RecipeView({ recipe }: Props) {
       {recipeDirectionPages.map((page, i) => (
         <>
           <div data-recipe-content={i + 1}>
-            <Recipe recipe={buildRecipePage(recipe, page.directions)} directionsStartIndex={page.directionsIndex} />
+            <RecipePage recipe={buildRecipePage(recipe, page.directions)} directionsStartIndex={page.directionsIndex} />
           </div>
           <div data-canvas-container={i + 1} className="canvas-container" />
         </>

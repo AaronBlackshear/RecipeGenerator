@@ -1,8 +1,6 @@
-import { createFetcher } from '@hooks/swr';
-import useSWRMutation from 'swr/mutation';
+import { NewRecipe } from '@shared/types';
+import axios from 'axios';
 
-export const useCreateRecipe = () => {
-  const { trigger } = useSWRMutation(`/api/recipes/new`, createFetcher)
-
-  return trigger;
+export const createRecipe = (recipe: NewRecipe) => {
+  return axios.post(`/api/recipes/new`, { recipe });
 }

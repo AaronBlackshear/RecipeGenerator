@@ -1,12 +1,12 @@
-import React, { useState } from 'react'
-import { Combobox } from '@headlessui/react'
 import { Input } from '@components/Form';
+import { Combobox } from '@headlessui/react';
 import { useApiBootData } from '@page_impls/HomePage/useApiBootData';
-import { RecipeType } from '@shared/types';
-import classNames from 'classnames';
+import { Recipe } from '@prisma/client';
 import { Nullable } from '@utils/types';
-import { useRouter } from 'next/router';
 import { getRecipeUrl } from '@utils/url_app';
+import classNames from 'classnames';
+import { useRouter } from 'next/router';
+import React, { useState } from 'react';
 
 export function Search() {
   const router = useRouter();
@@ -14,7 +14,7 @@ export function Search() {
   // TEMP
   const data = useApiBootData();
 
-  const [selectedValue, setSelectedValue] = useState<Nullable<RecipeType>>(null);
+  const [selectedValue, setSelectedValue] = useState<Nullable<Recipe>>(null);
   const [searchValue, setSearchValue] = useState<string>();
 
   return (
@@ -35,7 +35,7 @@ export function Search() {
         />
         <Combobox.Options className="absolute z-10 top-16 w-full bg-gray-12 drop-shadow-md rounded-2xl py-4 list-none">
           {data?.recentRecipes.map((recipe) => (
-            <Combobox.Option key={recipe._id} value={recipe}>
+            <Combobox.Option key={recipe.id} value={recipe}>
               {({ active }) => (
                 <p className={classNames(
                   'body-small-bold px-4 py-1',

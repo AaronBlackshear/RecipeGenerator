@@ -3,31 +3,24 @@ generator client {
 }
 
 datasource db {
-  provider = "mongodb"
-  url      = env("PRISMA_CONNECTION_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
-type RecipesDirections {
-  value String
-}
+model Recipe {
+  id                  String   @id @default(uuid())
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+  userId              String
+  cookTime            Int
+  image               String
+  prepTime            Int
+  servings            Int
+  slug                String
+  title               String
+  directions          String[]
+  optionalIngredients String[]
+  requiredIngredients String[]
 
-type RecipesOptionalIngredients {
-  value String
-}
-
-type RecipesRequiredIngredients {
-  value String
-}
-
-model recipes {
-  id                   String                       @id @default(auto()) @map("_id") @db.ObjectId
-  cook_time            Int
-  directions           RecipesDirections[]
-  image                String
-  optional_ingredients RecipesOptionalIngredients[]
-  prep_time            Int
-  required_ingredients RecipesRequiredIngredients[]
-  servings             Int
-  slug                 String
-  title                String
+  @@unique([userId, title])
 }

@@ -29,6 +29,7 @@
     "@storybook/nextjs": "^7.0.6",
     "@storybook/react": "^7.0.6",
     "@storybook/testing-library": "^0.1.0",
+    "@supabase/supabase-js": "^2.21.0",
     "@types/downloadjs": "^1.4.3",
     "@types/node": "18.15.10",
     "@types/react": "18.0.30",

@@ -1,8 +1,7 @@
 import { Button, ButtonLink } from '@components/Button';
 import { Loader } from '@components/Loader';
 import { RecipeView } from '@components/Recipe';
-import { useApiBootData } from '@page_impls/RecipePage/useApiBootData';
-import { RecipeType } from '@shared/types';
+import { useApiBootData } from '@page_impls/RecipeShowPage/useApiBootData';
 import { getRecipeEditFormUrl } from '@utils/url_app';
 import axios from 'axios';
 import download from 'downloadjs';
@@ -22,7 +21,7 @@ export function RecipePage() {
   return (
     <div className="pb-12">
       <section className="flex justify-end mb-5 space-x-3">
-        <Button variant="redPrimary" onClick={() => deleteRecipe(recipe._id)}>
+        <Button variant="redPrimary" onClick={() => deleteRecipe(recipe.id)}>
           Delete
         </Button>
 

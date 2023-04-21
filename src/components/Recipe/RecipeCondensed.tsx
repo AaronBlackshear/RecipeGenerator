@@ -1,10 +1,10 @@
-import { RecipeType } from '@shared/types';
+import { Recipe } from '@prisma/client';
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react'
+import React from 'react';
 
 type Props = {
-  recipe: RecipeType;
+  recipe: Recipe;
 }
 
 export function RecipeCondensed({ recipe }: Props) {
@@ -20,9 +20,9 @@ export function RecipeCondensed({ recipe }: Props) {
           <div className="text-gray-400 text-sm">
             <span>{recipe.servings} servings</span>
             <span> | </span>
-            <span>{recipe.prep_time}</span>
+            <span>{recipe.prepTime}</span>
             <span> | </span>
-            <span>{recipe.cook_time}</span>
+            <span>{recipe.cookTime}</span>
           </div>
         </section>
       </div>

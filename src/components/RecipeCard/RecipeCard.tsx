@@ -1,12 +1,12 @@
-import { RecipeType } from '@shared/types';
+import { Recipe } from '@prisma/client';
 import { getRecipeUrl } from '@utils/url_app';
 import classNames from 'classnames';
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react'
+import React from 'react';
 
 type Props = {
-  recipe: RecipeType;
+  recipe: Recipe;
 }
 
 export function RecipeCard({ recipe }: Props) {
@@ -26,11 +26,11 @@ export function RecipeCard({ recipe }: Props) {
         </div>
 
         <p className="caption text-gray-6">
-          <span>6 servings</span>
+          <span>{recipe.servings} servings</span>
           <span> | </span>
-          <span>25min Prep</span>
+          <span>{recipe.prepTime} min Prep</span>
           <span> | </span>
-          <span>35min Cook</span>
+          <span>{recipe.cookTime} min Cook</span>
         </p>
       </section>
     </Link>

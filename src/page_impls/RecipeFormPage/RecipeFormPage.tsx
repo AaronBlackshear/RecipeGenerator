@@ -1,14 +1,14 @@
-import React, { useMemo } from 'react'
-import slugify from 'slugify'
-import { useWindowWidth } from '@react-hook/window-size'
-import { useForm, UseFormReturn } from 'react-hook-form';
+import { RecipePage } from '@components/Recipe';
+import { RecipeForm } from '@components/RecipeForm';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Recipe } from '@components/Recipe'
-import { RecipeForm } from '@components/RecipeForm'
-import { buildRecipePage, separateRecipeDirections } from '@utils/recipe'
-import { RecipeType } from '@shared/types'
-import { Nullable } from '@utils/types';
 import { recipeFormSchema } from '@page_impls/RecipeFormPage/formSchema';
+import { Recipe } from '@prisma/client';
+import { useWindowWidth } from '@react-hook/window-size';
+import { buildRecipePage, separateRecipeDirections } from '@utils/recipe';
+import { Nullable } from '@utils/types';
+import React, { useMemo } from 'react';
+import { UseFormReturn, useForm } from 'react-hook-form';
+import slugify from 'slugify';
 
 export type FormInputs = {
   title: string;
@@ -17,12 +17,12 @@ export type FormInputs = {
   prepTime: number;
   cookTime: number;
   requiredIngredients: { value: string }[];
-  optionalIngredients?: { value: string }[];
+  optionalIngredients: { value: string }[];
   directions: { value: string }[];
 }
 
 type Props = {
-  recipe?: RecipeType;
+  recipe?: Recipe;
 }
 
 export function RecipeFormPage({ recipe }: Props) {
@@ -60,40 +60,43 @@ function RecipePreview({ form }: RecipePreviewProps) {
   return (
     <div className="flex flex-col gap-y-3">
       {recipeDirectionPages.length ? recipeDirectionPages.map((page, i) => (
-        <Recipe key={i} recipe={buildRecipePage(recipe, page.directions)} directionsStartIndex={page.directionsIndex} />
+        <RecipePage key={i} recipe={buildRecipePage(recipe, page.directions)} directionsStartIndex={page.directionsIndex} />
       )) : (
-        <Recipe recipe={recipe} />
+        <RecipePage recipe={recipe} />
       )}
     </div>
   )
 
-  function mockRecipe(formState: FormInputs): RecipeType {
+  function mockRecipe(formState: FormInputs): Recipe {
     return {
-      _id: 'mock_id',
+      id: 'mock_id',
       slug: slugify(formState.title || ''),
+      userId: 'mock_user_id',
+      createdAt: new Date(),
+      updatedAt: new Date(),
       title: formState.title || '',
       image: formState.image || '',
       servings: formState.servings,
-      prep_time: formState.prepTime,
-      cook_time: formState.cookTime,
-      required_ingredients: formState.requiredIngredients,
-      optional_ingredients: formState.optionalIngredients,
-      directions: formState.directions,
+      prepTime: formState.prepTime,
+      cookTime: formState.cookTime,
+      requiredIngredients: formState.requiredIngredients.map(({ value }) => value),
+      optionalIngredients: formState.optionalIngredients?.map(({ value }) => value) || [],
+      directions: formState.directions.map(({ value }) => value),
     }
   }
 }
 
-function getInitialFormState(recipe?: RecipeType): FormInputs {
+function getInitialFormState(recipe?: Recipe): FormInputs {
   if (recipe) {
     return {
       image: recipe.image,
       title: recipe.title,
       servings: recipe.servings,
-      prepTime: recipe.prep_time,
-      cookTime: recipe.cook_time,
-      requiredIngredients: recipe.required_ingredients,
-      optionalIngredients: recipe.optional_ingredients || undefined,
-      directions: recipe.directions,
+      prepTime: recipe.prepTime,
+      cookTime: recipe.cookTime,
+      requiredIngredients: recipe.requiredIngredients.map(ingredient => ({ value: ingredient })),
+      optionalIngredients: recipe.optionalIngredients.map(ingredient => ({ value: ingredient })),
+      directions: recipe.directions.map(direction => ({ value: direction })),
     }
   }
 
