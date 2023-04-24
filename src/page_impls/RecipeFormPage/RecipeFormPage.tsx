@@ -1,19 +1,19 @@
-import { RecipePage } from '@components/Recipe';
+import { Button } from '@components/Button';
+import { RecipePage, RecipeTemplate, downloadRecipeTemplate } from '@components/Recipe';
 import { RecipeForm } from '@components/RecipeForm';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { recipeFormSchema } from '@page_impls/RecipeFormPage/formSchema';
 import { Recipe } from '@prisma/client';
 import { useWindowWidth } from '@react-hook/window-size';
 import { buildRecipePage, separateRecipeDirections } from '@utils/recipe';
-import { Nullable } from '@utils/types';
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { UseFormReturn, useForm } from 'react-hook-form';
 import slugify from 'slugify';
 
 export type FormInputs = {
   id?: string;
   title: string;
-  image: Nullable<string>;
+  image: string;
   servings: number;
   prepTime: number;
   cookTime: number;
@@ -32,21 +32,44 @@ export function RecipeFormPage({ recipe }: Props) {
     defaultValues: {
       ...getInitialFormState(recipe)
     },
-    resolver: yupResolver(recipeFormSchema)
+    resolver: yupResolver(recipeFormSchema),
   });
 
+  const [formDirty, setFormDirty] = useState<boolean>(false);
+
+  useEffect(() => {
+    setFormDirty(form.formState.isDirty)
+  }, [form.formState.submitCount, form.formState.isDirty])
+
   const showFullPreview = width >= 1280;
+  const formValues = form.watch()
+  const isEditPage = !!recipe?.id;
 
   return (
     <div className="flex items-start gap-x-4">
-      <div className="flex-1 bg-gray-12 p-2 rounded-lg">
-        <RecipeForm form={form} />
+      <div className="flex-1 bg-gray-12 p-2 rounded-lg space-y-2">
+        <RecipeForm form={form} recipe={recipe} />
+
+        {isEditPage && <Button variant="secondary" fullWidth disabled={formDirty || form.formState.isSubmitting} onClick={downloadTemplate}>Download Recipe</Button>}
       </div>
 
       {/* SHOW PREVIEW ON DESKTOP */}
       {showFullPreview && <RecipePreview form={form} />}
+
+      {/* Note: Render `RecipeTemplate` before attempting to download instead of on demand because of synchronus issues with generating canvas elements  */}
+      {/* Extra note: Conditionally render `RecipeTemplate` to keep generated canvas elements up-to-date with formValues */}
+      {!form.formState.isDirty && (
+        <div className="fixed w-0 h-0 overflow-hidden">
+          <RecipeTemplate recipe={mockRecipe(formValues)} />
+        </div>
+      )}
     </div>
   )
+
+  function downloadTemplate(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+    event.preventDefault();
+    downloadRecipeTemplate(mockRecipe(formValues))
+  }
 }
 
 type RecipePreviewProps = {
@@ -67,23 +90,23 @@ function RecipePreview({ form }: RecipePreviewProps) {
       )}
     </div>
   )
+}
 
-  function mockRecipe(formState: FormInputs): Recipe {
-    return {
-      id: 'mock_id',
-      slug: slugify(formState.title || ''),
-      userId: 'mock_user_id',
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      title: formState.title || '',
-      image: formState.image || '',
-      servings: formState.servings,
-      prepTime: formState.prepTime,
-      cookTime: formState.cookTime,
-      requiredIngredients: formState.requiredIngredients.map(({ value }) => value),
-      optionalIngredients: formState.optionalIngredients?.map(({ value }) => value) || [],
-      directions: formState.directions.map(({ value }) => value),
-    }
+function mockRecipe(formState: FormInputs): Recipe {
+  return {
+    id: 'mock_id',
+    slug: slugify(formState.title || ''),
+    userId: 'mock_user_id',
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    title: formState.title || '',
+    image: formState.image || '',
+    servings: formState.servings,
+    prepTime: formState.prepTime,
+    cookTime: formState.cookTime,
+    requiredIngredients: formState.requiredIngredients.map(({ value }) => value),
+    optionalIngredients: formState.optionalIngredients?.map(({ value }) => value) || [],
+    directions: formState.directions.map(({ value }) => value),
   }
 }
 
@@ -103,7 +126,7 @@ function getInitialFormState(recipe?: Recipe): FormInputs {
   }
 
   return {
-    image: null,
+    image: '',
     title: '',
     servings: 0,
     prepTime: 0,

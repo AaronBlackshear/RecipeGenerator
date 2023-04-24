@@ -1,4 +1,4 @@
-import { Recipe } from "@prisma/client";
+import { UpdatedRecipe } from "@shared/types";
 
 const CHARACTER_LIMIT = 1100;
 const MAX_STEPS_PER_PAGE = 10;
@@ -8,7 +8,7 @@ type SplitRecipeMetadata = {
   directionsIndex: number;
 }[]
 
-export function separateRecipeDirections(recipe: Recipe): SplitRecipeMetadata {
+export function separateRecipeDirections(recipe: UpdatedRecipe): SplitRecipeMetadata {
   const { directions } = recipe;
 
   const pages: SplitRecipeMetadata = [];
@@ -37,7 +37,7 @@ function getCharacterCount(arr: string[]) {
   }, 0)
 }
 
-export function buildRecipePage(recipe: Recipe, pageDirections: string[]): Recipe {
+export function buildRecipePage(recipe: UpdatedRecipe, pageDirections: string[]): UpdatedRecipe {
   return {
     ...recipe,
     directions: pageDirections,

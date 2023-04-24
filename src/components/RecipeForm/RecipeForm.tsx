@@ -4,6 +4,7 @@ import { Input, InputRow, Label } from '@components/Form';
 import { ImageUpload } from '@components/RecipeForm/ImageUpload';
 import { createRecipe, updateRecipe } from '@hooks/recipe/mutations';
 import { FormInputs } from '@page_impls/RecipeFormPage';
+import { Recipe } from '@prisma/client';
 import { NewRecipe } from '@shared/types';
 import { capitalize } from '@utils/index';
 import { useRouter } from 'next/router';
@@ -14,6 +15,7 @@ import slugify from 'slugify';
 
 type Props = {
   form: UseFormReturn<FormInputs>;
+  recipe?: Recipe;
 }
 
 export function RecipeForm({ form }: Props) {
@@ -42,7 +44,7 @@ export function RecipeForm({ form }: Props) {
     try {
       if (formInputs.id) {
         await updateRecipe({ id: formInputs.id, ...formattedRecipe })
-        toast.success('Recipe Updated!')
+        toast.success('Recipe updated')
       } else {
         await createRecipe(formattedRecipe)
         router.push('/')
@@ -51,6 +53,10 @@ export function RecipeForm({ form }: Props) {
       toast.error(err.response.data.message);
     }
     setIsSubmitting(false)
+    form.reset(formInputs, {
+      keepDirty: false,
+      keepIsSubmitted: false,
+    })
   }
 
   return (

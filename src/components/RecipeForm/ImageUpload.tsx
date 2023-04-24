@@ -1,10 +1,10 @@
-import { ImageOrPlaceholder } from '@components/ImageOrPlaceholder'
-import ImageUploading, { ImageListType } from 'react-images-uploading';
-import React from 'react'
 import { Icon } from '@components/Icons';
-import classNames from 'classnames';
-import { UseFormReturn } from 'react-hook-form';
+import { ImageOrPlaceholder } from '@components/ImageOrPlaceholder';
 import { FormInputs } from '@page_impls/RecipeFormPage';
+import classNames from 'classnames';
+import React from 'react';
+import { UseFormReturn } from 'react-hook-form';
+import ImageUploading, { ImageListType } from 'react-images-uploading';
 
 type Props = {
   form: UseFormReturn<FormInputs>;
@@ -42,7 +42,7 @@ export function ImageUpload({ form }: Props) {
   }
 
   function onImageRemove() {
-    form.setValue("image", null)
+    form.setValue("image", "")
   }
 }
 
