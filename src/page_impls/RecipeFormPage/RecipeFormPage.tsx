@@ -2,12 +2,15 @@ import { Button } from '@components/Button';
 import { RecipePage, RecipeTemplate, downloadRecipeTemplate } from '@components/Recipe';
 import { RecipeForm } from '@components/RecipeForm';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { deleteRecipe } from '@hooks/recipe/mutations';
 import { recipeFormSchema } from '@page_impls/RecipeFormPage/formSchema';
 import { Recipe } from '@prisma/client';
 import { useWindowWidth } from '@react-hook/window-size';
 import { buildRecipePage, separateRecipeDirections } from '@utils/recipe';
+import { useRouter } from 'next/router';
 import React, { useEffect, useMemo, useState } from 'react';
 import { UseFormReturn, useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 import slugify from 'slugify';
 
 export type FormInputs = {
@@ -27,6 +30,8 @@ type Props = {
 }
 
 export function RecipeFormPage({ recipe }: Props) {
+  const router = useRouter()
+
   const width = useWindowWidth({ wait: 250 });
   const form = useForm<FormInputs>({
     defaultValues: {
@@ -51,6 +56,7 @@ export function RecipeFormPage({ recipe }: Props) {
         <RecipeForm form={form} recipe={recipe} />
 
         {isEditPage && <Button variant="secondary" fullWidth disabled={formDirty || form.formState.isSubmitting} onClick={downloadTemplate}>Download Recipe</Button>}
+        {isEditPage && <Button variant="redPrimary" fullWidth disabled={formDirty || form.formState.isSubmitting} onClick={deleteRecipeAction}>Delete Recipe</Button>}
       </div>
 
       {/* SHOW PREVIEW ON DESKTOP */}
@@ -69,6 +75,13 @@ export function RecipeFormPage({ recipe }: Props) {
   function downloadTemplate(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     event.preventDefault();
     downloadRecipeTemplate(mockRecipe(formValues))
+  }
+
+  async function deleteRecipeAction() {
+    if (!recipe?.id) return;
+    await deleteRecipe(recipe.id)
+    router.replace('/')
+    toast.success('Deleted recipe')
   }
 }
 

@@ -8,3 +8,7 @@ export const createRecipe = (recipe: NewRecipe) => {
 export const updateRecipe = (recipe: UpdatedRecipe) => {
   return axios.post(`/api/recipes/${recipe.id}/edit`, { recipe });
 }
+
+export const deleteRecipe = (recipeId: string) => {
+  return axios.delete(`/api/recipes/${recipeId}/delete`);
+}
