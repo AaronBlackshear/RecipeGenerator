@@ -1,4 +1,4 @@
-import { Recipe } from '@prisma/client';
+import { UpdatedRecipe } from '@shared/types';
 import { DM_Serif_Display, Playfair_Display, Poppins } from 'next/font/google';
 import Image from 'next/image';
 import React from 'react';
@@ -8,7 +8,7 @@ const poppins = Poppins({ weight: ['400'], subsets: ['latin'] });
 const playfairDisplay = Playfair_Display({ weight: ['400'], subsets: ['latin'] });
 
 type Props = {
-  recipe: Recipe;
+  recipe: UpdatedRecipe;
   directionsStartIndex?: number;
 };
 
